@@ -76,11 +76,7 @@ WSGI_APPLICATION = 'httpleague.wsgi.application'
 
 DATABASES = {
     'default': {
-<<<<<<< HEAD
         'ENGINE': 'django.db.backends.postgresql,
-=======
-        'ENGINE': 'django.db.backends.postgresql',
->>>>>>> 6bc8f7547b875f580e2341e0ba42c09d69b06078
         'NAME': 'httpleague',
     }
 }
