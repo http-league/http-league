@@ -16,6 +16,10 @@ class Site(models.Model):
     def __str__(self):
         return self.name
 
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 # models
 #submission, comment, photo, cetegory, style, tech-stack
