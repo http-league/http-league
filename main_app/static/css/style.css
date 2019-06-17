@@ -1,0 +1,233 @@
+@import url("https://rsms.me/inter/inter.css");
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  min-height: 100%;
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/*------------------------------------*\
+    # Type
+\*------------------------------------*/
+*, html, body {
+  background-color: #101010;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 36px;
+  color: #FAFAFA;
+  line-height: 1.25em;
+  font-weight: 900;
+}
+h1:first-child, h2:first-child, h3:first-child, h4:first-child, h5:first-child, h6:first-child {
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: 1.5384615385rem;
+  margin-bottom: 18.4615384615px;
+}
+
+h3 {
+  font-size: 1.3333333333rem;
+  margin-bottom: 16px;
+}
+
+h4 {
+  font-size: 1.1764705882rem;
+  margin-bottom: 14.1176470588px;
+}
+
+h5 {
+  font-size: 1.1111111111rem;
+  margin-bottom: 13.3333333333px;
+}
+
+h6 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+p {
+  margin-bottom: 20px;
+  font-size: 1.0625rem;
+  line-height: 1.5em;
+  color: #101010;
+}
+p:last-of-type {
+  margin-bottom: 0;
+}
+
+a {
+  color: #FAFAFA;
+  text-decoration: none;
+}
+a:hover {
+  transition: all 0.2s ease;
+  color: #c7c7c7;
+  text-decoration: none;
+}
+
+ul,
+ol {
+  margin: 20px 0 0 20px;
+}
+ul li,
+ol li {
+  margin-top: 10px;
+  line-height: 1.5em;
+  color: #101010;
+}
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+  margin-top: 0;
+}
+
+ul li {
+  list-style: disc;
+}
+ul ul li {
+  list-style: circle;
+}
+
+ol li {
+  list-style: decimal;
+}
+
+hr {
+  height: 1px;
+  margin: 32px 0;
+  border: none;
+  background-color: #FAFAFA;
+}
+
+table, td, th {
+  border: 1px solid #FAFAFA;
+  text-align: left;
+}
+
+th {
+  font-weight: 900;
+}
+
+th, td {
+  padding: 15px;
+}
+
+figcaption {
+  margin-top: 10px;
+  color: #2a2a2a;
+  font-size: 16px;
+}
+
+pre {
+  display: block;
+  margin: 0 0 40px 0;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #FAFAFA;
+  overflow: auto;
+  border-radius: 3px;
+}
+pre code {
+  position: static;
+  padding: 0;
+  border: none;
+  line-height: 1.5em;
+}
+
+code {
+  position: relative;
+  top: -0.2em;
+  padding: 3px;
+  font-family: Courier New, Courier, monospace;
+  font-size: 0.8854166667rem;
+  color: #484848;
+  line-height: 1em;
+  pointer-events: none;
+  border: 1px solid #FAFAFA;
+  border-radius: 3px;
+}
+
+em,
+i,
+.italic {
+  font-style: italic;
+}
+
+strong,
+b,
+.bold {
+  font-weight: 900;
+}
+
+/*------------------------------------*\
+    # Navigation
+\*------------------------------------*/
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 240px;
+  height: 100vh;
+  font-family: "Inter", sans-serif;
+}
+
+/*# sourceMappingURL=style.css.map */
