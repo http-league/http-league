@@ -30,8 +30,8 @@ class Site(models.Model):
 #photo, category, style, tech-stack
 
 class Submission(models.Model):
-    statement = TextField(max_length=500)
-    site_name = TextField(max_length=50)
+    statement = models.TextField(max_length=500)
+    site_name = models.TextField(max_length=50)
     url = models.CharField(max_length=100)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
@@ -52,7 +52,7 @@ class Comment(models.Model):
     return f"{self.comment_display()} on {self.date}"
 
   class Meta:
-    ordering = ['-pub_date', 'author']
+    ordering = ['date']
 
 
 
