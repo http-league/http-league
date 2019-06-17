@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from datetime import date
 from django.contrib.auth.models import User
 
@@ -20,11 +21,38 @@ class Site(models.Model):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
+    # def get_absolute_url(self):
+    #   return reverse('______detail', kwargs={'pk': self.id})    
 
-# models
-#submission, comment, photo, cetegory, style, tech-stack
 
-# class Submission(Site):
-#     statement = TextField(max_length=500)
-    
+####MODELS####
+
+#photo, category, style, tech-stack
+
+class Submission(models.Model):
+    statement = TextField(max_length=500)
+    site_name = TextField(max_length=50)
+    url = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
+    # def get_absolute_url(self):
+    #   return reverse('______detail', kwargs={'pk': self.id})
+
+
+class Comment(models.Model):
+  date = models.DateField('comment date')
+  txt_input = models.TextField(max_length=200)
+
+  site = models.ForeignKey(Site, on_delete=models.CASCADE)
+
+  def __str__(self):
+    return f"{self.comment_display()} on {self.date}"
+
+  class Meta:
+    ordering = ['-pub_date', 'author']
+
+
 
