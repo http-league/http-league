@@ -216,12 +216,17 @@ nav {
     height: 100vh;
     font-family: $inter;
     font-size: 24px;
-    background-color: #fff;
+    background-color: $primary;
     border-right: 3px solid $secondary;
 
+
+}
+
+nav section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 4rem;
 }
 
 nav a {
