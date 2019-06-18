@@ -256,7 +256,7 @@ main {
   transition: transform 0.5s;
 }
 
-main.open {
+.open {
   transform: translate(275px, 0);
 }
 

@@ -16,13 +16,17 @@
             <a href="/">Home</a>
             <a href="{% url 'about' %}">About</a>
             <a href="{% url 'blog' %}">Blog</a>
+            <a href="{% url 'design' %}">Cup</a>
 
         </section>
     </nav>
+
     <main>
         <a class="toggle-nav" href="#">
             Menu
         </a>
+        <div id="overlay"></div>
+
         {% block content %}{% endblock content %}
         <footer>
             <p>All Rights Reserved, &copy;

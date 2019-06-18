@@ -219,7 +219,6 @@ nav {
     background-color: $primary;
     border-right: 3px solid $secondary;
 
-
 }
 
 nav section {
@@ -245,11 +244,12 @@ main {
     transition: transform 0.5s;
 
 }
-
-main.open {
-
+.open {
     transform: translate(275px, 0);
 }
+
+
+
 /*------------------------------------*\
     # Footer
 \*------------------------------------*/
