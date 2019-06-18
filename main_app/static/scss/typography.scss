@@ -1,0 +1,28 @@
+@import './reset', './colors.scss', './mixins';
+@import url('https://rsms.me/inter/inter.css');
+
+$inter: 'Inter', sans-serif;
+
+// Base Font for HTML
+$base-font-size: 16px;
+
+// Paragraph Styles
+$paragraph-color      : $primary;
+$paragraph-size       : rem(17px);
+$paragraph-line-height: 1.5em;
+$paragraph-margin     : 20px;
+
+// Header Styles
+$header-color      : $secondary;
+$header-size       : rem(32px);
+$header-line-height: 1.25em;
+$header-margin     : $paragraph-margin * 1.2;
+
+$link-color: $secondary;
+
+// hr
+$hr-margin: 32px;
+
+// Type Misc
+$font-weight-bold: 900;
+$border-color: $secondary;

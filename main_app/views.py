@@ -1,25 +1,27 @@
 from django.shortcuts import render
-
+from datetime import datetime
 
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
+today = datetime.today()
+year = datetime.now().year
 
 
 def home(request):
-    render(request, 'home.html', {'title': 'HTTP League | Web Design Repo'})
+    return render(request, 'home.html', {'title': 'HTTP League | Web Design Repo', 'year': year})
 
 
 def about(request):
-    return render(request, 'about.html', {'title': 'About | HTTP League'})
+    return render(request, 'about.html', {'title': 'About | HTTP League', 'year': year})
 
 
 def blog_index(request):
-    return render(request, 'blog/post_list.html', {'title': 'Blog | HTTP League'})
+    return render(request, 'blog/post_list.html', {'title': 'Blog | HTTP League', 'year': year})
 
 
 def sites_detail(request):
-    return render(request, 'sites/detail.html', {'title': 'HTTP League | Web Design Repo'})
+    return render(request, 'sites/detail.html', {'title': 'HTTP League | Web Design Repo', 'year': year})
 
 
 def signup(request):

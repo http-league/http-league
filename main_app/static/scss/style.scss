@@ -1,0 +1,226 @@
+@import './typography.scss', './colors.scss';
+/*------------------------------------*\
+    # Type
+\*------------------------------------*/
+
+// Make type normal across browsers
+*, html, body {
+    background-color: $primary;
+    font-family: $inter;
+    font-size: $base-font-size;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+
+// Headers
+h1, h2, h3, h4, h5, h6 {
+    margin-top: $header-margin * 1.5;
+    color: $header-color;
+    line-height: $header-line-height;
+    font-weight: $font-weight-bold;
+
+    &:first-child {
+        margin-top: 0;
+    }
+}
+
+h1 {
+    font-size: $header-size;
+    margin-bottom: $header-margin;
+}
+
+h2 {
+    font-size: $header-size / 1.3;
+    margin-bottom: $header-margin / 1.3;
+}
+
+h3 {
+    font-size: $header-size / 1.5;
+    margin-bottom: $header-margin / 1.5;
+}
+
+h4 {
+    font-size: $header-size / 1.7;
+    margin-bottom: $header-margin / 1.7;
+}
+
+h5 {
+    font-size: $header-size / 1.8;
+    margin-bottom: $header-margin / 1.8;
+}
+
+h6 {
+    font-size: $header-size / 2;
+    margin-bottom: $header-margin / 2;
+}
+
+
+// Paragraphs
+p {
+    
+    margin-bottom: $paragraph-margin;
+    font-size: $paragraph-size;
+    line-height: $paragraph-line-height;
+    color: $paragraph-color;
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+}
+
+
+
+// Links
+a {
+    color: $link-color;
+    text-decoration: none;
+    &:hover {
+        transition: all 0.2s ease;
+        color: darken($link-color, 20%);
+        text-decoration: none;
+    }
+}
+
+
+// Lists
+ul,
+ol {
+    margin: $paragraph-margin 0 0 20px;
+
+    li {
+        margin-top: 10px;
+        line-height: $paragraph-line-height;
+        color: $paragraph-color;
+    }
+
+    ul,
+    ol {
+        margin-top: 0;
+    }
+}
+
+ul {
+
+    li {
+        list-style: disc;
+    }
+
+    ul {
+
+        li {
+            list-style: circle;
+        }
+    }
+}
+
+ol {
+
+    li {
+        list-style: decimal;
+    }
+}
+
+
+// hr
+hr {
+    height: 1px;
+    margin: $hr-margin 0;
+    border: none;
+    background-color: $border-color;
+}
+
+
+
+
+
+table, td, th {
+    border: 1px solid $border-color;
+    text-align: left;
+}
+
+th {
+    font-weight: $font-weight-bold;
+}
+
+th, td {
+    padding: 15px;
+}
+
+
+figcaption {
+    margin-top: 10px;
+    color: lighten($paragraph-color, 10%);
+    font-size: $paragraph-margin * 0.8;
+}
+
+
+// Code
+pre {
+    display: block;
+    margin: 0 0 40px 0;
+    padding: 20px;
+    background-color: lighten($border-color, 12%);
+    border: 1px solid $border-color;
+    overflow: auto;
+    border-radius: 3px;
+
+    code {
+        position: static;
+        padding: 0;
+        border: none;
+        line-height: 1.5em;
+    }
+}
+
+code {
+    position: relative;
+    top: -0.2em;
+    padding: 3px;
+    font-family: Courier New, Courier, monospace;
+    font-size: $paragraph-size / 1.2;
+    color: darken($border-color, 70%);
+    line-height: 1em;
+    pointer-events: none;
+    border: 1px solid $border-color;
+    border-radius: 3px;
+}
+
+
+
+// Misc Styles
+em,
+i,
+.italic {
+    font-style: italic;
+}
+
+strong,
+b,
+.bold {
+    font-weight: $font-weight-bold;
+}
+
+
+/*------------------------------------*\
+    # Navigation
+\*------------------------------------*/
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    font-family: $inter;
+}
+
+/*------------------------------------*\
+    # Footer
+\*------------------------------------*/
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
