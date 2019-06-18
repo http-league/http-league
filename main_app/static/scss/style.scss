@@ -135,7 +135,6 @@ hr {
 
 
 
-
 table, td, th {
     border: 1px solid $border-color;
     text-align: left;
@@ -214,4 +213,14 @@ nav {
     width: 240px;
     height: 100vh;
     font-family: $inter;
+}
+
+/*------------------------------------*\
+    # Footer
+\*------------------------------------*/
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
