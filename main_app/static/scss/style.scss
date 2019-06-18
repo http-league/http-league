@@ -7,12 +7,14 @@
 *, html, body {
     background-color: $primary;
     font-family: $inter;
+    color: $secondary;
     font-size: $base-font-size;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
+
 
 // Headers
 h1, h2, h3, h4, h5, h6 {
@@ -210,11 +212,39 @@ nav {
     position: fixed;
     top: 0;
     left: 0;
-    width: 240px;
+    width: 275px;
     height: 100vh;
     font-family: $inter;
+    font-size: 24px;
+    background-color: #fff;
+    border-right: 3px solid $secondary;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+nav a {
+    margin: 4px 32px;
+}
+
+/*------------------------------------*\
+    # Main Content
+\*------------------------------------*/
+
+main {
+    position: relative;
+    z-index: 1;
+    background-color: $primary;
+    min-height: 100vh;
+    transition: transform 0.5s;
+
+}
+
+main.open {
+
+    transform: translate(275px, 0);
+}
 /*------------------------------------*\
     # Footer
 \*------------------------------------*/

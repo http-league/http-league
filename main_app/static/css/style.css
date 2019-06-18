@@ -56,6 +56,7 @@ table {
 *, html, body {
   background-color: #101010;
   font-family: "Inter", sans-serif;
+  color: #FAFAFA;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -107,7 +108,7 @@ p {
   margin-bottom: 20px;
   font-size: 1.0625rem;
   line-height: 1.5em;
-  color: #101010;
+  color: #FAFAFA;
 }
 p:last-of-type {
   margin-bottom: 0;
@@ -131,7 +132,7 @@ ul li,
 ol li {
   margin-top: 10px;
   line-height: 1.5em;
-  color: #101010;
+  color: #FAFAFA;
 }
 ul ul,
 ul ol,
@@ -173,7 +174,7 @@ th, td {
 
 figcaption {
   margin-top: 10px;
-  color: #2a2a2a;
+  color: white;
   font-size: 16px;
 }
 
@@ -225,9 +226,34 @@ nav {
   position: fixed;
   top: 0;
   left: 0;
-  width: 240px;
+  width: 275px;
   height: 100vh;
   font-family: "Inter", sans-serif;
+  font-size: 24px;
+  background-color: #fff;
+  border-right: 3px solid #FAFAFA;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+nav a {
+  margin: 4px 32px;
+}
+
+/*------------------------------------*\
+    # Main Content
+\*------------------------------------*/
+main {
+  position: relative;
+  z-index: 1;
+  background-color: #101010;
+  min-height: 100vh;
+  transition: transform 0.5s;
+}
+
+main.open {
+  transform: translate(275px, 0);
 }
 
 /*------------------------------------*\
