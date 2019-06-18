@@ -5,6 +5,7 @@ from datetime import date, datetime
 
 # Create your models here.
 
+
 class Category(models.Model):
     name = models.CharField(max_length=25)
 
@@ -28,12 +29,12 @@ class Tech_stack(models.Model):
 
 class Site(models.Model):
     url = models.CharField(max_length=100)
-    name = models.CharField(max_length=100)
-    pub_date = models.DateTimeField(auto_now_add=True)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    pub_date = models.DateField('publish date')
+    category = models.ManyToManyField(Category)
     style = models.ForeignKey(Style, on_delete=models.CASCADE)
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -44,7 +45,7 @@ class Site(models.Model):
         return super().form_valid(form)
 
     class Meta:
-        ordering = ('-pub_date',) 
+        ordering = ('-pub_date',)
 
 
 # class Submission(models.Model):
@@ -74,7 +75,7 @@ class Site(models.Model):
 #     class Meta:
 #         ordering = ['-created',]
 
-    
+
 # class Photo(models.Model):
 #     url = models.CharField(max_length=200)
 #     site = models.ForeignKey(Site, on_delete=models.CASCADE)
@@ -87,4 +88,3 @@ class Site(models.Model):
 
 
 # class User(models.Model):
-    

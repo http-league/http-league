@@ -2,6 +2,12 @@ from django.shortcuts import render
 from datetime import datetime
 # from .form import *
 
+<<<<<<< HEAD
+
+# from django.contrib.auth import login
+# from django.contrib.auth.forms import UserCreationForm
+# # Create your views here.
+=======
 # from django.contrib.auth import login
 # from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
@@ -23,6 +29,7 @@ def blog_index(request):
 
 def sites_detail(request):
     return render(request, 'sites/detail.html', {'title': 'HTTP League | Web Design Repo', 'year': year})
+>>>>>>> master
 
 
 # def signup(request):
