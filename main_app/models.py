@@ -11,18 +11,18 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-# class Style(models.Model):
-#     name = models.CharField(max_length=25)
+class Style(models.Model):
+    name = models.CharField(max_length=25)
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
 
 
-# class Tech_stack(models.Model):
-#     name = models.CharField(max_length=25)
+class Tech_stack(models.Model):
+    name = models.CharField(max_length=25)
 
-#     def __str__(self):
-#         return self.name
+    def __str__(self):
+        return self.name
 
 
 class Site(models.Model):
@@ -30,8 +30,8 @@ class Site(models.Model):
     name = models.CharField(max_length=50)
     pub_date =  models.DateField('publish date')
     category = models.ManyToManyField(Category)
-    # style = models.ForeignKey(Style, on_delete=models.CASCADE)
-    # tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
+    style = models.ForeignKey(Style, on_delete=models.CASCADE)
+    tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
