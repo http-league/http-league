@@ -31,7 +31,7 @@ class Site(models.Model):
     name = models.CharField(max_length=100)
     pub_date = models.DateTimeField(auto_now_add=True)
     # user = models.ForeignKey(User, on_delete=models.CASCADE)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ManyToManyField(Category)
     style = models.ForeignKey(Style, on_delete=models.CASCADE)
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
 
