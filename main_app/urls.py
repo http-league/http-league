@@ -27,13 +27,11 @@ urlpatterns = [
 
 
     # # Comments
-
     # TODO: ADD submissions/<int:submission_id>/add_comment/ that points to views.add_comment
     # path(comment/create/', views.CommentCreate.as_view(), name='comments_create'),
     # path('comment/<int:pk>/update/', views.CommentUpdate.as_view(), name='comments_update'),
     # path('comment/<int:pk>/delete/', views.CommentDelete.as_view(), name='comments_delete'),
 
-<<<<<<< HEAD
     ## Login/Profile paths
     # path('profile/', views.view_profile, name='view_profile'),
     # path('profile/edit', views.edit_profile, name='edit_profile'),
@@ -41,7 +39,7 @@ urlpatterns = [
     # path('accounts/signup', views.signup, name='signup'),
 
     # Submission
-=======
+
     # # Submissions/Community
     # TODO: ADD community/ URL that points to views.SubmissionList.as_view() named 'submission_index'
 
@@ -58,5 +56,5 @@ urlpatterns = [
     # OTHER
 
     # TODO: add dsuccess/ URL that points to views.success_delete
->>>>>>> 0b6772e536e309a8d9e354aa1321f57625bdc8ad
+
 ]
