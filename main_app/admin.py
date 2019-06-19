@@ -11,4 +11,6 @@ admin.site.register(Tech_stack)
 admin.site.register(Submission)
 admin.site.register(Photo)
 admin.site.register(Comment)
+# admin.site.register(UserProfile)
+
 
