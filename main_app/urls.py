@@ -2,29 +2,52 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # TODO: SET UP HOME VIEW  -- done
+    # // TODO: SET UP HOME VIEW
     path('', views.home, name='home'),
 
-    # TODO: SET UP BLOG VIEW --
+    # // TODO: SET UP BLOG VIEW
     path('blog/', views.blog_index, name='blog'),
 
-    #  TODO: SET UP MAIN_ABOUT VIEW --
+    #  // TODO: SET UP MAIN_ABOUT VIEW
     path('about/', views.about, name='main_about'),
 
-
-    # path('category/<int:category_id>/', views.category_detail, name='category'),
+    # // TODO: SETUP category view
+    path('category/<int:category_id>/', views.category_detail, name='category'),
 
     # TODO: Will probably need to re-do this route
     # path(r'^(?P<username>.+)/$', views.profile, name='profile'),
     # # Sites
-    path('sites/<int:sites_id>/', views.sites_detail, name='detail'),
-    # path('sites/<int:site_id/create/', views.SiteCreate.as_view(), name='sites_create'),
-    # path('sites/<int:pk>/update/', views.SiteUpdate.as_view(), name='sites_update'),
-    # path('sites/<int:pk>/delete/', views.SiteDelete.as_view(), name='sites_delete'),
+
+    # // TODO: SETUP Site Views
+    path('sites/<int:site_id>/', views.sites_detail, name='detail'),
+    path('sites/create/',
+         views.SiteCreate.as_view(), name='sites_create'),
+    path('sites/<int:pk>/update/', views.SiteUpdate.as_view(), name='sites_update'),
+    path('sites/<int:pk>/delete/', views.SiteDelete.as_view(), name='sites_delete'),
+
+
 
     # # Comments
-    # path('comment/<int:comment_id/create/', views.CommentCreate.as_view(), name='comments_create'),
+
+    # TODO: ADD submissions/<int:submission_id>/add_comment/ that points to views.add_comment
+    # path(comment/create/', views.CommentCreate.as_view(), name='comments_create'),
     # path('comment/<int:pk>/update/', views.CommentUpdate.as_view(), name='comments_update'),
     # path('comment/<int:pk>/delete/', views.CommentDelete.as_view(), name='comments_delete'),
-    # # Submission
+
+    # # Submissions/Community
+    # TODO: ADD community/ URL that points to views.SubmissionList.as_view() named 'submission_index'
+
+
+    # TODO: ADD SUBMISSIONS URLS:
+
+    #   TODO: submissions/<int:submission_id>/ that points to views.submissions_detail named 'submission_detail"
+
+    #   TODO: submissions/create/ that points to views.SubmissionCreate.as_view() named 'submission_create"
+
+    #   TODO: submissions/<int:pk>/delete/ that points to views.SubmissionDelete.as_view() named 'submission_delete"
+
+
+    # OTHER
+
+    # TODO: add dsuccess/ URL that points to views.success_delete
 ]
