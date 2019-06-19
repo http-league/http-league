@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+
+
 from datetime import datetime
 # from .form import *
 
@@ -9,20 +13,21 @@ today = datetime.today()
 year = datetime.now().year
 
 
+
 def home(request):
-    return render(request, 'home.html', {'title': 'HTTP League | Web Design Repo', 'year': year})
+    return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
 
 
 def about(request):
-    return render(request, 'about.html', {'title': 'About | HTTP League', 'year': year})
+    return render(request, 'about.html', {'title': 'About · HTTP League', 'year': year})
 
 
 def blog_index(request):
-    return render(request, 'blog/post_list.html', {'title': 'Blog | HTTP League', 'year': year})
+    return render(request, 'blog/post_list.html', {'title': 'Blog · HTTP League', 'year': year})
 
 
 def sites_detail(request):
-    return render(request, 'sites/detail.html', {'title': 'HTTP League | Web Design Repo', 'year': year})
+    return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
 
 
 # def signup(request):

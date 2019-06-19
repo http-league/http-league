@@ -8,21 +8,33 @@
         <meta content="ie=edge" http-equiv="X-UA-Compatible">
         <script src="https://kit.fontawesome.com/632585e591.js"></script>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
         <title>{{ title }}</title>
     </head>
-        <nav>
+    <nav>
+        <section>
             <a href="/">Home</a>
-            <a href="{% url 'about'%}">About</a>
-            <a href="{% url 'blog'%}">Blog</a>
-        </nav>
-    <main>
-    {% block content %}{% endblock content %}
-    </main>
-    <footer>
-        <p>All Rights Reserved, &copy; {{ year }}</p>
-    </footer>
-    <body>
+            <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'blog' %}">Blog</a>
+            <a href="{% url 'design' %}">Cup</a>
 
+        </section>
+    </nav>
+
+    <main>
+        <a class="toggle-nav" href="#">
+            Menu
+        </a>
+        <div id="overlay"></div>
+
+        {% block content %}{% endblock content %}
+        <footer>
+            <p>All Rights Reserved, &copy;
+                {{ year }}</p>
+        </footer>
+    </main>
+    <body>
+        <script src="{% static 'js/menu.js' %}"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     </body>
 
