@@ -105,6 +105,9 @@ def sites_detail(request):
     return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
 
 
+def category_detail(request):
+    return render(request, 'category/detail.html', {'title': 'Category · HTTP League', 'year': year})
+
 # def signup(request):
 #     error_message = ''
 #     if request.method == 'POST':
