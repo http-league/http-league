@@ -66,13 +66,9 @@ class Submission(models.Model):
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
     photo = models.ManyToManyField(Photo)
 
-<<<<<<< HEAD
     def __str__(self):
         return self.statement
 ## this is the random comment
-=======
-
->>>>>>> master
 
 class Comment(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
