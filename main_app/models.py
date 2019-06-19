@@ -52,7 +52,7 @@ class Site(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('', kwargs={'site_id': self.id})
+        return reverse('sites_detail', kwargs={'site_id': self.id})
 
     class Meta:
         ordering = ('-pub_date',)
@@ -81,7 +81,7 @@ class Submission(models.Model):
         return self.statement
 
     def get_absolute_url(self):
-        return reverse('', kwargs={'site_id': self.id})
+        return reverse('submission_detail', kwargs={'submission_id': self.id})
 
 
 class Comment(models.Model):
@@ -94,7 +94,7 @@ class Comment(models.Model):
         return 'Comment by: {}'.format(self.username)
 
     def get_absolute_url(self):
-        return reverse('site_id', kwargs={'pk': self.id})
+        return reverse('comments_create', kwargs={'comment_id': self.id})
 
     class Meta:
         ordering = ['-created', ]
