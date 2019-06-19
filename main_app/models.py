@@ -2,8 +2,18 @@ from django.db import models
 from django.urls import reverse
 from datetime import date, datetime
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 # Create your models here.
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    description = models.CharField(max_length=100, default='')
+    email = models.CharField(max_length=75, default='')
+
+    def __str__(self):
+        return self.user.username
+
 
 class Category(models.Model):
     name = models.CharField(max_length=25)
@@ -35,9 +45,9 @@ class Site(models.Model):
     def __str__(self):
         return self.name
 
-    # ! The form_valid method is for class based views in views.py -- please delete this function
-    # Assigning a specific site to a user
-      
+    def get_absolute_url(self):
+        return reverse('sites_detail', kwargs={'site_id': self.id})
+
     class Meta:
         ordering = ('-pub_date',)
 
@@ -64,8 +74,8 @@ class Submission(models.Model):
     def __str__(self):
         return self.statement
 
-    # TODO: ADD get_absolute_url method this Model
-# this is the random comment
+    def get_absolute_url(self):
+        return reverse('submission_detail', kwargs={'submission_id': self.id})
 
 
 class Comment(models.Model): 
@@ -77,6 +87,9 @@ class Comment(models.Model):
 
     def __str__(self):
         return 'Comment by: {}'.format(self.username)
+
+    def get_absolute_url(self):
+        return reverse('comments_create', kwargs={'comment_id': self.id})
 
     class Meta:
         ordering = ['-created', ]
