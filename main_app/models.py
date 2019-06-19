@@ -72,7 +72,6 @@ class Submission(models.Model):
         return self.statement
 
     # TODO: ADD get_absolute_url method this Model
-    reverse('submission_detail', kwargs={'submission_id': self.id})
 # this is the random comment
 
 
