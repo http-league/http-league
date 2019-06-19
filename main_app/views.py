@@ -5,8 +5,9 @@ from django.views.generic import ListView, DetailView
 
 from datetime import datetime
 # from .form import *
-# from django.contrib.auth import login
+from django.contrib.auth import login
 # from django.contrib.auth.forms import UserCreationForm
+
 from .models import *
 
 # Create your views here.
@@ -27,7 +28,7 @@ class SiteCreate(CreateView):
         # Let the form work as normal
         return super().form_valid(form)
 
-
+# Class SiteUpdate(UpdateView)
 # TODO: Add Submission Create
 # TODO: Add Submission Update
 # TODO: Add Submission Delete
