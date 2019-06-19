@@ -14,12 +14,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-def create_profile(sender, **kwargs):
-    if kwargs['created']:
-        profile = Profile.objects.create(user=kwargs['instance'])
-
-post_save.connect(create_profile, sender=User)
-
 
 class Category(models.Model):
     name = models.CharField(max_length=25)
@@ -105,8 +99,5 @@ class Comment(models.Model):
 
 # TODO: CREATE Post Model with title, subtitle, body, author (1:M where a User has many Posts), and created fields
 
-<<<<<<< HEAD
-=======
 
 # TODO: CREATE class User(models.Model):
->>>>>>> 0b6772e536e309a8d9e354aa1321f57625bdc8ad
