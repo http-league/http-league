@@ -1,4 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView
+
+
 from datetime import datetime
 
 from django.contrib.auth import login
@@ -6,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 today = datetime.today()
 year = datetime.now().year
+
 
 
 def home(request):
