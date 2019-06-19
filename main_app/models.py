@@ -89,10 +89,10 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-created', ]
 
-    # TODO: ADD get_absolute_url method for Model
+    # ? TODO: ADD get_absolute_url method for Model
 
 
-# TODO: CREATE Post Model with title, subtitle, body, author, and created fields
+# TODO: CREATE Post Model with title, subtitle, body, author (1:M where a User has many Posts), and created fields
 
 
 # TODO: CREATE class User(models.Model):

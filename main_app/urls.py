@@ -11,8 +11,8 @@ urlpatterns = [
     #  // TODO: SET UP MAIN_ABOUT VIEW
     path('about/', views.about, name='main_about'),
 
-    # TODO: SETUP category view
-    # path('category/<int:category_id>/', views.category_detail, name='category'),
+    # // TODO: SETUP category view
+    path('category/<int:category_id>/', views.category_detail, name='category'),
 
     # TODO: Will probably need to re-do this route
     # path(r'^(?P<username>.+)/$', views.profile, name='profile'),
@@ -42,9 +42,9 @@ urlpatterns = [
 
     #   TODO: submissions/<int:submission_id>/ that points to views.submissions_detail named 'submission_detail"
 
-    #   TODO: submissions/create/ that points to views.SubmissionCreate named 'submission_create"
+    #   TODO: submissions/create/ that points to views.SubmissionCreate.as_view() named 'submission_create"
 
-    #   TODO: submissions/<int:pk>/delete/ that points to views.SubmissionDelete named 'submission_delete"
+    #   TODO: submissions/<int:pk>/delete/ that points to views.SubmissionDelete.as_view() named 'submission_delete"
 
 
     # OTHER
