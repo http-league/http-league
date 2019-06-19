@@ -17,11 +17,9 @@
         <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar navbar-dark bg-dark">
             <a class="navbar-brand mr-0 mr-md-2 text-primary" href="/design">C</a>
             <div class="navbar-nav-scroll">
-                <ul id="nav" class="navbar-nav bd-navbar-nav flex-row">
+                <ul class="navbar-nav bd-navbar-nav flex-row">
                     <li class="nav-item">
-                        <a 
-                        class="nav-link" 
-                        href="{% url 'design' %}">
+                        <a class="nav-link{% if title == 'page_titles[0]' %} 'active'{% endif %}" href="{% url 'design' %}">
                             Home
                         </a>
                     </li>
@@ -51,6 +49,7 @@
 
         <!--TODO: add main content container -->
         {% block content %}{% endblock %}
+        <script src="{% static 'js/main.js' %}"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     </body>
 

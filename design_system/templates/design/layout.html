@@ -14,8 +14,45 @@
     <body>
 
         <!--TODO: add header nav -->
+        <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar navbar-dark bg-dark">
+            <a class="navbar-brand mr-0 mr-md-2 text-primary" href="/design">C</a>
+            <div class="navbar-nav-scroll">
+                <ul class="navbar-nav bd-navbar-nav flex-row" id="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'design' %}">
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {% if title == 'Introduction · Cup' %} 'active' {% endif %}" href="{% url 'docs' %}">
+                            Documentation
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">HTTP League</a>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+                <li class="nav-item">
+                    <a aria-label="GitHub" class="nav-link p-2" href="https://github.com/http-league/http-league/tree" rel="noopener" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a aria-label="Twitter" class="nav-link p-2" href="https://twitter.com/httpleague/" rel="noopener" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+
+            </ul>
+
+        </header>
         <!--TODO: add sidbar nav -->
-        <!--TODO: add main content container --><script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"> </script>
+        <!--TODO: add main content container -->
+        {% block content %}here
+        {% endblock %}
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     </body>
 
 </html>

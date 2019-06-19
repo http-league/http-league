@@ -28,11 +28,11 @@ def index(request):
 
 
 def docs(request):
-    return render(request, 'docs/index.html', {'title': f'{page_titles[1]} · Cup', 'year': year})
+    return render(request, 'docs/index.html', {'title': f'{page_titles[1]} · Cup', 'year': year, 'pages': page_titles})
 
 
 def build_tools(request):
-    return render(request, 'docs/build_tools.html', {'title': f'{page_titles[2]} · Cup', 'year': year})
+    return render(request, 'docs/build_tools.html', {'title': f'{page_titles[2]} · Cup', 'year': year, 'pages': page_titles})
 
 
 '''
@@ -44,9 +44,9 @@ Component URLs
 
 def components(request, slug):
     if slug:
-        return render(request, 'docs/components/detail.html', {'title': slug})
+        return render(request, 'docs/components/detail.html', {'title': slug, 'pages': page_titles})
     else:
-        return render(request, 'docs/components/detail.html', {'title': 'No slug'})
+        return render(request, 'docs/components/detail.html', {'title': 'No slug', 'pages': page_titles})
 
 
 '''
@@ -58,9 +58,9 @@ Utilities URLs
 
 def utilities(request, slug):
     if slug:
-        return render(request, 'docs/utilities/detail.html', {'title': slug})
+        return render(request, 'docs/utilities/detail.html', {'title': slug, 'pages': page_titles})
     else:
-        return render(request, 'docs/utilities/detail.html', {'title': 'No slug'})
+        return render(request, 'docs/utilities/detail.html', {'title': 'No slug', 'pages': page_titles})
 
 
 '''
@@ -71,8 +71,8 @@ About URLs
 
 
 def about(request):
-    return render(request, 'about/index.html', {'title': f'{page_titles[3]} · Cup', 'year': year})
+    return render(request, 'about/index.html', {'title': f'{page_titles[3]} · Cup', 'year': year, 'pages': page_titles})
 
 
 def about_team(request):
-    return render(request, 'about/team.html', {'title': f'{page_titles[4]} · Cup', 'year': year})
+    return render(request, 'about/team.html', {'title': f'{page_titles[4]} · Cup', 'year': year, 'pages': page_titles})
