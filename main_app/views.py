@@ -7,6 +7,8 @@ from datetime import datetime
 # from .form import *
 from django.contrib.auth import login
 # from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import *
 
@@ -15,6 +17,10 @@ from .models import *
 
 today = datetime.today()
 year = datetime.now().year
+
+
+def admin_check(user):
+    return user.is_superuser
 
 
 class SiteCreate(CreateView):
@@ -28,7 +34,17 @@ class SiteCreate(CreateView):
         # Let the form work as normal
         return super().form_valid(form)
 
-# Class SiteUpdate(UpdateView)
+
+class SiteUpdate(UpdateView):
+    model = Site
+    fields = '__all__'
+
+
+class SiteDelete(UpdateView):
+    model = Site
+    success_url = '/'
+
+
 # TODO: Add Submission Create
 # TODO: Add Submission Update
 # TODO: Add Submission Delete
