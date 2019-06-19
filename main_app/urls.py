@@ -27,7 +27,7 @@ urlpatterns = [
 
 
     # # Comments
-    # TODO: ADD submissions/<int:submission_id>/add_comment/ that points to views.add_comment
+    path('submissions/<int:submission_id>/add_comment/', views.add_comment, name='add_comment'),
     # path(comment/create/', views.CommentCreate.as_view(), name='comments_create'),
     # path('comment/<int:pk>/update/', views.CommentUpdate.as_view(), name='comments_update'),
     # path('comment/<int:pk>/delete/', views.CommentDelete.as_view(), name='comments_delete'),
