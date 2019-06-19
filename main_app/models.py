@@ -47,6 +47,7 @@ class Site(models.Model):
     class Meta:
         ordering = ('-pub_date',)
 
+
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
@@ -71,7 +72,8 @@ class Submission(models.Model):
 ## this is the random comment
 
 class Comment(models.Model):
-    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
+    site = models.ForeignKey(
+        Site, on_delete=models.CASCADE, related_name='comments')
     username = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -80,11 +82,7 @@ class Comment(models.Model):
         return 'Comment by: {}'.format(self.username)
 
     class Meta:
-        ordering = ['-created',]
-
-
-
-
+        ordering = ['-created', ]
 
 
 # class Blog(models.Model):
