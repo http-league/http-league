@@ -6,7 +6,7 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 
-class UserProfile(models.Model):
+class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     description = models.CharField(max_length=100, default='')
     email = models.CharField(max_length=75, default='')
