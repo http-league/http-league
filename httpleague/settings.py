@@ -28,7 +28,7 @@ SECRET_KEY = 'jr2uoq3059rr^$)_jo#e(_68z33m*npr_pnte*#uk2kwoq9fm1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['http-league-dev.herokuapp.com']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -123,10 +124,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_ROOT = 'staticfiles'
-# STATIC_URL = '/static/'
-
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
@@ -140,3 +139,5 @@ LOGOUT_REDIRECT_URL = '/'
 
 # Configure Django App for Heroku
 django_heroku.settings(locals())
+
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
