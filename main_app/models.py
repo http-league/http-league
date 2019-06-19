@@ -6,8 +6,6 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-
-
 class Category(models.Model):
     name = models.CharField(max_length=25)
 
@@ -35,17 +33,21 @@ class Site(models.Model):
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-
     def __str__(self):
         return self.name
 
+    # ! The form_valid method is for class based views in views.py -- please delete this function
     # Assigning a specific site to a user
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-      
+
+    # TODO: ADD get_absolute_url method for this Model
+
     class Meta:
         ordering = ('-pub_date',)
+
 
 class Photo(models.Model):
     url = models.CharField(max_length=200)
@@ -68,10 +70,14 @@ class Submission(models.Model):
 
     def __str__(self):
         return self.statement
-## this is the random comment
+
+    # TODO: ADD get_absolute_url method this Model
+# this is the random comment
+
 
 class Comment(models.Model):
-    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
+    site = models.ForeignKey(
+        Site, on_delete=models.CASCADE, related_name='comments')
     username = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -80,15 +86,12 @@ class Comment(models.Model):
         return 'Comment by: {}'.format(self.username)
 
     class Meta:
-        ordering = ['-created',]
+        ordering = ['-created', ]
 
-
-
-
+    # TODO: ADD get_absolute_url method for Model
 
 
 # class Blog(models.Model):
 
 
 # class User(models.Model):
-
