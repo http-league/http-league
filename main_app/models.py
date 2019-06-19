@@ -6,13 +6,13 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 
-# class UserProfile(models.Model):
-#     user = models.OneToOneField(User)
-#     description = models.CharField(max_length=100, default='')
-#     email = models.CharField(max_length=75, default='')
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    description = models.CharField(max_length=100, default='')
+    email = models.CharField(max_length=75, default='')
 
-#     def __str__(self):
-#         return self.user.username
+    def __str__(self):
+        return self.user.username
 
 # def create_profile(sender, **kwargs):
 #     if kwargs['created']:
@@ -51,8 +51,8 @@ class Site(models.Model):
     def __str__(self):
         return self.name
 
-
-    # TODO: ADD get_absolute_url method for this Model
+    def get_absolute_url(self):
+        return reverse('', kwargs={'site_id': self.id})
 
     class Meta:
         ordering = ('-pub_date',)
@@ -80,13 +80,12 @@ class Submission(models.Model):
     def __str__(self):
         return self.statement
 
-    # TODO: ADD get_absolute_url method this Model
-# this is the random comment
+    def get_absolute_url(self):
+        return reverse('', kwargs={'site_id': self.id})
 
 
 class Comment(models.Model):
-    site = models.ForeignKey(
-        Site, on_delete=models.CASCADE, related_name='comments')
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
     username = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -94,10 +93,12 @@ class Comment(models.Model):
     def __str__(self):
         return 'Comment by: {}'.format(self.username)
 
+    def get_absolute_url(self):
+        return reverse('site_id', kwargs={'pk': self.id})
+
     class Meta:
         ordering = ['-created', ]
 
-    # TODO: ADD get_absolute_url method for Model
 
 
 # class Blog(models.Model):
