@@ -6,11 +6,10 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
+
+
 class Category(models.Model):
     name = models.CharField(max_length=25)
-
-    def __str__(self):
-        return self.name
 
 
 class Style(models.Model):
@@ -27,7 +26,6 @@ class Tech_stack(models.Model):
         return self.name
 
 
-
 class Site(models.Model):
     url = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
@@ -37,6 +35,7 @@ class Site(models.Model):
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+
     def __str__(self):
         return self.name
 
@@ -44,7 +43,7 @@ class Site(models.Model):
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
-
+      
     class Meta:
         ordering = ('-pub_date',)
 
@@ -67,8 +66,6 @@ class Submission(models.Model):
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
     photo = models.ManyToManyField(Photo)
 
-    def __str__(self):
-        return self.statement
 
 
 class Comment(models.Model):
@@ -92,3 +89,4 @@ class Comment(models.Model):
 
 
 # class User(models.Model):
+
