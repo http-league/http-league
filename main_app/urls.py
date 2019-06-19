@@ -14,8 +14,7 @@ urlpatterns = [
 
     # path('category/<int:category_id>/', views.category_detail, name='category'),
 
-    # TODO: Will probably need to re-do this route
-    # path(r'^(?P<username>.+)/$', views.profile, name='profile'),
+   
     # # Sites
     path('sites/<int:sites_id>/', views.sites_detail, name='detail'),
     # path('sites/<int:site_id/create/', views.SiteCreate.as_view(), name='sites_create'),
@@ -27,6 +26,11 @@ urlpatterns = [
     # path('comment/<int:pk>/update/', views.CommentUpdate.as_view(), name='comments_update'),
     # path('comment/<int:pk>/delete/', views.CommentDelete.as_view(), name='comments_delete'),
 
-    # TODO
+    ## Login/Profile paths
+    # path('profile/', views.view_profile, name='view_profile'),
+    # path('profile/edit', views.edit_profile, name='edit_profile'),
+    # path('login', views.login, name'login'),
+    # path('accounts/signup', views.signup, name='signup'),
+
     # Submission
 ]
