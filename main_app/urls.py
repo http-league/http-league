@@ -23,7 +23,9 @@ urlpatterns = [
     path('sites/<int:pk>/delete/', views.SiteDelete.as_view(), name='sites_delete'),
 
     # # Comments
+    # TODO Create an add comment view
     # path('submissions/<int:submission_id>/add_comment/', views.add_comment, name='add_comment'),
+
     # path(comment/create/', views.CommentCreate.as_view(), name='comments_create'),
     # path('comment/<int:pk>/update/', views.CommentUpdate.as_view(), name='comments_update'),
     # path('comment/<int:pk>/delete/', views.CommentDelete.as_view(), name='comments_delete'),
@@ -35,10 +37,15 @@ urlpatterns = [
     # path('accounts/signup', views.signup, name='signup'), 
 
     # # Submissions/Community
-    path('community/', views.SubmissionList.as_view(), name='submission_index')
-    path('submissions/<int:submission_id>/', views.submissions_detail, name='submission_detail')
-    path('submissions/create/', views.SubmissionCreate.as_view(), name='submission_create')
-    path('submissions/<int:pk>/delete/', views.SubmissionDelete.as_view(), name='submission_delete')
+    path('community/', views.SubmissionList.as_view(), name='submission_index'),
+    
+    # TODO Create a Submission_detail view
+    # path('submissions/<int:submission_id>/', views.submissions_detail, name='submission_detail'),
+    path('submissions/create/', views.SubmissionCreate.as_view(), name='submission_create'),
+
+    path('submissions/<int:pk>/delete/', views.SubmissionDelete.as_view(), name='submission_delete'),
     # OTHER
-    path('success/', views.success_delete, name='success')
+
+    # TODO Create a success_delete view
+    # path('success/', views.success_delete, name='success'),
 ]
