@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
-
 class Category(models.Model):
     name = models.CharField(max_length=25)
 
@@ -38,13 +37,7 @@ class Site(models.Model):
 
     # ! The form_valid method is for class based views in views.py -- please delete this function
     # Assigning a specific site to a user
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    # TODO: ADD get_absolute_url method for this Model
-
+      
     class Meta:
         ordering = ('-pub_date',)
 
@@ -75,9 +68,8 @@ class Submission(models.Model):
 # this is the random comment
 
 
-class Comment(models.Model):
-    site = models.ForeignKey(
-        Site, on_delete=models.CASCADE, related_name='comments')
+class Comment(models.Model): 
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
     # ! TODO: CHANGE username field to 1:M relationship where a User has many comments.
     username = models.CharField(max_length=100)
     body = models.TextField()
