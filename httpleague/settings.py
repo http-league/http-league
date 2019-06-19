@@ -140,4 +140,4 @@ LOGOUT_REDIRECT_URL = '/'
 # Configure Django App for Heroku
 django_heroku.settings(locals())
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
