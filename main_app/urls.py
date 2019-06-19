@@ -2,12 +2,20 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    # TODO: SET UP HOME VIEW  -- done
     path('', views.home, name='home'),
+
+    # TODO: SET UP BLOG VIEW --
     path('blog/', views.blog_index, name='blog'),
-    path('about/', views.about, name='about'),
+
+    #  TODO: SET UP MAIN_ABOUT VIEW --
+    path('about/', views.about, name='main_about'),
+
+
     # path('category/<int:category_id>/', views.category_detail, name='category'),
-    
-    # path(r'^(?P<username>.+)/$', views.profile, name='profile'), ### <--- Will need to redo this path
+
+    # TODO: Will probably need to re-do this route
+    # path(r'^(?P<username>.+)/$', views.profile, name='profile'),
     # # Sites
     path('sites/<int:sites_id>/', views.sites_detail, name='detail'),
     # path('sites/<int:site_id/create/', views.SiteCreate.as_view(), name='sites_create'),

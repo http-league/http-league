@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     # basic urls
-    path('', views.index, name='design'),
+    path('', views.index, name='cup_home'),
     path('docs/', views.docs, name='docs'),
     path('docs/build-tools/', views.build_tools, name='build_tools'),
 
@@ -19,6 +19,6 @@ urlpatterns = [
          views.utilities, name='utilities_detail'),
 
     # About URLs
-    path('docs/about/', views.about, name='about'),
-    path('docs/about/team/', views.about_team, name='about'),
+    path('docs/about/', views.about, name='cup_about'),
+    path('docs/about/team/', views.about_team, name='cup_about_team'),
 ]

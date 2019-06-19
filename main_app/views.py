@@ -5,14 +5,39 @@ from django.views.generic import ListView, DetailView
 
 from datetime import datetime
 # from .form import *
-
-# from django.contrib.auth import login
+from django.contrib.auth import login
 # from django.contrib.auth.forms import UserCreationForm
+
+from .models import *
+
 # Create your views here.
+
+
 today = datetime.today()
 year = datetime.now().year
 
 
+class SiteCreate(CreateView):
+    model = Site
+    fields = '__all__'
+
+    # this
+    def form_valid(self, form):
+        # assigned the logged in user (self.request.user)
+        form.instance.user = self.request.user
+        # Let the form work as normal
+        return super().form_valid(form)
+
+# Class SiteUpdate(UpdateView)
+# TODO: Add Submission Create
+# TODO: Add Submission Update
+# TODO: Add Submission Delete
+
+# TODO: Add Comment Create
+# TODO: Add Comment Update
+    # * Class based View
+# TODO: Add Comment Delete
+    # * Class based View
 
 def home(request):
     return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'year': year})

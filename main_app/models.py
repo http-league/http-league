@@ -99,6 +99,7 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-created', ]
 
+    # TODO: ADD get_absolute_url method for Model
 
 
 # class Blog(models.Model):

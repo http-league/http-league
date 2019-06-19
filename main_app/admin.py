@@ -13,3 +13,4 @@ admin.site.register(Submission)
 admin.site.register(Photo)
 admin.site.register(Comment)
 
+
