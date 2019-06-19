@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView
 
 from datetime import datetime
 # from .form import *
+from .mixins import *
 from django.contrib.auth import login
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -22,12 +23,13 @@ year = datetime.now().year
 def admin_check(user):
     return user.is_superuser
 
+# // TODO: Site Class based views
 
-class SiteCreate(CreateView):
+
+class SiteCreate(isAdminMixin, CreateView):
     model = Site
     fields = '__all__'
 
-    # this
     def form_valid(self, form):
         # assigned the logged in user (self.request.user)
         form.instance.user = self.request.user
@@ -35,25 +37,45 @@ class SiteCreate(CreateView):
         return super().form_valid(form)
 
 
-class SiteUpdate(UpdateView):
+class SiteUpdate(isAdminMixin, UpdateView):
     model = Site
     fields = '__all__'
 
 
-class SiteDelete(UpdateView):
+class SiteDelete(isAdminMixin, UpdateView):
     model = Site
     success_url = '/'
 
 
-# TODO: Add Submission Create
-# TODO: Add Submission Update
-# TODO: Add Submission Delete
+# // TODO: Submission Class Based Views -- List, CD
+class SubmissionList(ListView):
+    model = Submission
 
-# TODO: Add Comment Create
-# TODO: Add Comment Update
-    # * Class based View
-# TODO: Add Comment Delete
-    # * Class based View
+
+class SubmissionCreate(LoginRequiredMixin, CreateView):
+    model = Submission
+    fields = '__all__'
+
+
+class SubmissionDelete(isAdminMixin, DeleteView):
+    def test_func(self):
+        return self.request.user.is_superuser
+
+    model = Submission
+    success_url = '/'
+
+
+# ? TODO: Comment Class Based Views -- CUD
+
+
+# TODO: Blog Post Class Based Views -- CRUD
+class PostCreate(isAdminMixin, CreateView):
+    model = Post
+
+
+class PostList(ListView):
+    model = Post
+
 
 def home(request):
     return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
