@@ -78,6 +78,7 @@ class Submission(models.Model):
 class Comment(models.Model):
     site = models.ForeignKey(
         Site, on_delete=models.CASCADE, related_name='comments')
+    # ! TODO: CHANGE username field to 1:M relationship where a User has many comments.
     username = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)

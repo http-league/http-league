@@ -69,26 +69,38 @@ class SubmissionDelete(isAdminMixin, DeleteView):
 
 
 # TODO: Blog Post Class Based Views -- CRUD
-class PostCreate(isAdminMixin, CreateView):
-    model = Post
+# class PostCreate(isAdminMixin, CreateView):
+#     model = Post
 
 
-class PostList(ListView):
-    model = Post
+# class PostList(ListView):
+#     model = Post
+
+# class PostUpdate(isAdminMixin, UpdateView):
+#     model = Post
+#     fields = '__all__'
 
 
+# class PostDelete(isAdminMixin, DeleteView):
+#     model = Post
+#     success_url = '/blog/'
+
+# TODO: FINISH home.html template
 def home(request):
     return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
 
 
+# TODO: FINISH about.html template
 def about(request):
     return render(request, 'about.html', {'title': 'About · HTTP League', 'year': year})
 
 
+# TODO: FINISH post_list.html template
 def blog_index(request):
     return render(request, 'blog/post_list.html', {'title': 'Blog · HTTP League', 'year': year})
 
 
+# TODO: FINISH sites/detail.html
 def sites_detail(request):
     return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
 
