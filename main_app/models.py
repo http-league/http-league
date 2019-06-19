@@ -69,7 +69,7 @@ class Submission(models.Model):
 
     def __str__(self):
         return self.statement
-
+## this is the random comment
 
 class Comment(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
