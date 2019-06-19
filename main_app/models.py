@@ -2,10 +2,24 @@ from django.db import models
 from django.urls import reverse
 from datetime import date, datetime
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 # Create your models here.
 
+class UserProfile(models.Model):
+    user = models.OneToOneField(User)
+    description = models.CharField(max_length=100, default='')
+    email = models.CharField(max_length=75, default='')
 
+
+    def __str__(self):
+        return self.user.username
+
+def create_profile(sender, **kwargs):
+    if kwargs =['created']
+        user_profile = UserProfile.objects.create(user=kwargs['instance'])
+
+post_save.connect(create_profile, sender=User)
 
 
 class Category(models.Model):
@@ -40,9 +54,6 @@ class Site(models.Model):
         return self.name
 
     # Assigning a specific site to a user
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
       
     class Meta:
         ordering = ('-pub_date',)
@@ -82,13 +93,6 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-created',]
 
-
-
-
-
-
 # class Blog(models.Model):
 
-
-# class User(models.Model):
 
