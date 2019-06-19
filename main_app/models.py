@@ -2,29 +2,9 @@ from django.db import models
 from django.urls import reverse
 from datetime import date, datetime
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
 
 # Create your models here.
 
-class UserProfile(models.Model):
-    user = models.OneToOneField(User)
-    description = models.CharField(max_length=100, default='')
-    email = models.CharField(max_length=75, default='')
-
-<<<<<<< HEAD
-
-    def __str__(self):
-        return self.user.username
-
-def create_profile(sender, **kwargs):
-    if kwargs =['created']
-        user_profile = UserProfile.objects.create(user=kwargs['instance'])
-
-post_save.connect(create_profile, sender=User)
-
-
-=======
->>>>>>> 90b3bc15522055719d15692719e44adb7fb14624
 class Category(models.Model):
     name = models.CharField(max_length=25)
 
@@ -57,17 +37,7 @@ class Site(models.Model):
 
     # ! The form_valid method is for class based views in views.py -- please delete this function
     # Assigning a specific site to a user
-<<<<<<< HEAD
       
-=======
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    # TODO: ADD get_absolute_url method for this Model
-
->>>>>>> 90b3bc15522055719d15692719e44adb7fb14624
     class Meta:
         ordering = ('-pub_date',)
 
@@ -99,8 +69,7 @@ class Submission(models.Model):
 
 
 class Comment(models.Model):
-    site = models.ForeignKey(
-        Site, on_delete=models.CASCADE, related_name='comments')
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
     username = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -109,19 +78,12 @@ class Comment(models.Model):
         return 'Comment by: {}'.format(self.username)
 
     class Meta:
-<<<<<<< HEAD
-        ordering = ['-created',]
-=======
         ordering = ['-created', ]
 
     # TODO: ADD get_absolute_url method for Model
 
->>>>>>> 90b3bc15522055719d15692719e44adb7fb14624
 
 # class Blog(models.Model):
 
 
-<<<<<<< HEAD
-=======
 # class User(models.Model):
->>>>>>> 90b3bc15522055719d15692719e44adb7fb14624
