@@ -58,7 +58,7 @@ class Photo(models.Model):
 
 class Submission(models.Model):
     site_name = models.CharField(max_length=100)
-    URL = models.CharField(max_length=200)
+    url = models.CharField(max_length=200)
     statement = models.TextField(max_length=500)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     category = models.ManyToManyField(Category)
@@ -66,7 +66,9 @@ class Submission(models.Model):
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
     photo = models.ManyToManyField(Photo)
 
-
+    def __str__(self):
+        return self.statement
+## this is the random comment
 
 class Comment(models.Model):
     site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
