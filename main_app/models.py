@@ -84,8 +84,9 @@ class Submission(models.Model):
         return reverse('submission_detail', kwargs={'submission_id': self.id})
 
 
-class Comment(models.Model):
+class Comment(models.Model): 
     site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
+    # ! TODO: CHANGE username field to 1:M relationship where a User has many comments.
     username = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -99,8 +100,13 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-created', ]
 
-    # TODO: ADD get_absolute_url method for Model
+    # ? TODO: ADD get_absolute_url method for Model
 
 
-# class Blog(models.Model):
+# TODO: CREATE Post Model with title, subtitle, body, author (1:M where a User has many Posts), and created fields
 
+<<<<<<< HEAD
+=======
+
+# TODO: CREATE class User(models.Model):
+>>>>>>> 0b6772e536e309a8d9e354aa1321f57625bdc8ad
