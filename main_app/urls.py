@@ -18,7 +18,7 @@ urlpatterns = [
     # path(r'^(?P<username>.+)/$', views.profile, name='profile'),
     # # Sites
     path('sites/<int:sites_id>/', views.sites_detail, name='detail'),
-    # path('sites/<int:site_id/create/', views.SiteCreate.as_view(), name='sites_create'),
+    path('sites/<int:site_id/create/', views.SiteCreate.as_view(), name='sites_create'),
     # path('sites/<int:pk>/update/', views.SiteUpdate.as_view(), name='sites_update'),
     # path('sites/<int:pk>/delete/', views.SiteDelete.as_view(), name='sites_delete'),
 

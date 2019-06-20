@@ -46,12 +46,65 @@
                 </li>
 
             </ul>
-
         </header>
-        <!--TODO: add sidbar nav -->
         <!--TODO: add main content container -->
-        {% block content %}here
-        {% endblock %}
+        <div class="container-fluid">
+            <div
+                class="row flex-xl-nowrap">
+                <!--TODO: add sidbar nav -->
+                <div class="col-12 col-md-3 col-xs-2 cd-sidebar">
+                    <div class="cd-menu d-flex align-items-center">
+                        <span>Documentation</span>
+                        <button aria-controls="cd-docs-nav" aria-expanded="false" aria-label="Toggle docs navigation" class="btn btn-link cd-docs-toggle d-md-none p-0 ml-3" data-target="#cd-docs-nav" data-toggle="collapse" type="button">
+                            <svg focusable="false" height="30" role="img" viewbox="0 0 30 30" width="30" xmlns="http://www.w3.org/2000/svg">
+                                <title>Menu</title>
+                                <path d="M4 7h22M4 15h22M4 23h22" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="currentColor"></path>
+                            </svg>
+                        </button>
+                    </div>
+                    <nav class="collapse cd-links" id="cd-docs-nav">
+                        <div class="cd-toc-item">
+                            <a class="cd-toc-link" href="">
+                                Getting Started
+                            </a>
+                            <ul class="nav cd-sidenav">
+                                <li>
+                                    <a href="">Introduction</a>
+                                </li>
+                                <li>
+                                    <a href="">Build Tools</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="cd-toc-item">
+                            <a class="cd-toc-link" href=""></a>
+                            <ul class="nav cd-sidenav">
+                                <li>
+                                    <a href=""></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="cd-toc-item">
+                            <a class="cd-toc-link" href=""></a>
+                            <ul class="nav cd-sidenav">
+                                <li>
+                                    <a href=""></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="cd-toc-item">
+                            <a class="cd-toc-link" href=""></a>
+                            <ul class="nav cd-sidenav">
+                                <li>
+                                    <a href=""></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+        {% block content %}{% endblock %}
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     </body>
 
