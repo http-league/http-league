@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.forms import ModelForm
 
 # from django.apps import AppConfig
@@ -16,7 +15,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=100, default='')
     email = models.EmailField(max_length=75)
-    image = models.ImageField(default='default.jpg', upload_to='profile.pics')
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
     def __str__(self):
         return f'{self.user.username} Profile'
@@ -78,7 +77,7 @@ class Submission(models.Model):
     category = models.ManyToManyField(Category)
     style = models.ForeignKey(Style, on_delete=models.CASCADE)
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
-    photo = models.ManyToManyField(Photo)
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.statement
