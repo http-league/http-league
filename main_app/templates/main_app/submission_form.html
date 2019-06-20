@@ -1,4 +1,12 @@
 {% extends "../layout.html" %}
 {% block content %}
     <h1>Submission Create</h1>
+    <form action="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit!">
+    </form>
+
 {% endblock %}

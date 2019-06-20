@@ -26,7 +26,7 @@ def admin_check(user):
 # // TODO: Site Class based views
 
 
-class SiteCreate(isAdminMixin, CreateView):
+class SiteCreate(CreateView):
     model = Site
     fields = '__all__'
 
@@ -37,12 +37,12 @@ class SiteCreate(isAdminMixin, CreateView):
         return super().form_valid(form)
 
 
-class SiteUpdate(isAdminMixin, UpdateView):
+class SiteUpdate(UpdateView):
     model = Site
     fields = '__all__'
 
 
-class SiteDelete(isAdminMixin, UpdateView):
+class SiteDelete(UpdateView):
     model = Site
     success_url = '/'
 
@@ -52,12 +52,13 @@ class SubmissionList(ListView):
     model = Submission
 
 
-class SubmissionCreate(LoginRequiredMixin, CreateView):
+class SubmissionCreate(CreateView):
     model = Submission
-    fields = '__all__'
+    fields = ['site_name', 'url', 'statement',
+              'category', 'style', 'tech_stack', 'photo']
 
 
-class SubmissionDelete(isAdminMixin, DeleteView):
+class SubmissionDelete(DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 

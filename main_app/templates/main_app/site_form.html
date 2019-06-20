@@ -1,4 +1,11 @@
 {% extends "../layout.html" %}
 {% block content %}
     <h1>Create Site</h1>
+    <form action="post">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" value="Submit!">
+    </form>
 {% endblock %}

@@ -1,4 +1,4 @@
-@import './typography.scss', './colors.scss';
+@import './typography.scss', './colors.scss', './utilities.scss';
 /*------------------------------------*\
     # Type
 \*------------------------------------*/
@@ -255,7 +255,6 @@ main {
 \*------------------------------------*/
 
 footer {
-    position: fixed;
     bottom: 0;
     left: 0;
 }
