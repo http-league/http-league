@@ -12,7 +12,7 @@ urlpatterns = [
     path('about/', views.about, name='main_about'),
 
     # // TODO: SETUP category view
-    path('category/<int:category_id>/', views.category_detail, name='category'),
+    #     path('category/<int:category_id>/', views.category_detail, name='category'),
 
     # Sites
 

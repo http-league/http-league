@@ -114,9 +114,9 @@ def sites_detail(request, site_id):
     return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'site': site, 'year': year})
 
 
-def category_detail(request, category_name):
-    sites = Site.objects.get(category=category_name)
-    return render(request, 'category/detail.html', {'title': 'Category · HTTP League', 'sites': sites, 'year': year})
+# def category_detail(request):
+
+#     return render(request, 'category/detail.html', {'title': 'Category · HTTP League', 'sites': site, 'year': year})
 
 
 def submissions_detail(request, submission_id):
