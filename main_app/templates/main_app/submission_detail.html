@@ -1,0 +1,18 @@
+{% extends "../layout.html" %}
+{% block content %}
+    <h1>Submission Detail</h1>
+    {% for photo in submission.photo_set.all %}
+    <img src="{{photo.url}}">
+    {% empty %}
+    <h1>
+        There are no photos yet
+    </h1>
+    <label for="photos">Upload Photos</label>
+    <form name="photos" action="{% url 'add_sub_photo' submission.id %}" enctype="multipart/form-data" method="POST">
+        {% csrf_token %}
+        <input multiple name="photo-files" type="file">
+        <br><br>
+        <input class="btn" type="submit" value="Upload Photo">
+    </form>
+    {% endfor %}
+{% endblock %}

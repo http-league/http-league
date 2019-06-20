@@ -90,6 +90,7 @@ class Submission(models.Model):
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
 
+
     def __str__(self):
         return self.statement
 

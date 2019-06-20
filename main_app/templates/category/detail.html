@@ -1,4 +1,8 @@
 {% extends "../layout.html" %}
 {% block content %}
-    <h1>Category:</h1>
+    <h1>Category:
+    </h1>
+    {% for sites in sites %}
+        <p>{{ site.name }}</p>
+    {% endfor %}
 {% endblock %}
