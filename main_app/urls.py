@@ -7,7 +7,7 @@ urlpatterns = [
 
     # // TODO: SET UP BLOG VIEW
     path('blog/', views.blog_index, name='blog'),
-
+    # TODO: POSTING BLOG Posts
     #  // TODO: SET UP MAIN_ABOUT VIEW
     path('about/', views.about, name='main_about'),
 

@@ -26,6 +26,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Style(models.Model):
     name = models.CharField(max_length=25)
 
