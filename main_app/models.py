@@ -99,5 +99,11 @@ class Comment(models.Model):
 
 # TODO: CREATE Post Model with title, subtitle, body, author (1:M where a User has many Posts), and created fields
 
+class Post(models.Model):
+    title = models.CharField(max_length=50)
+    subtitle = models.CharField(max_length=50)
+    body = models.TextField(default='')
+    author = models.CharField(max_length=50)
+
 
 # TODO: CREATE class User(models.Model):
