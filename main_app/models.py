@@ -2,12 +2,30 @@ from django.db import models
 from django.urls import reverse
 from datetime import date, datetime
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.forms import ModelForm
 
 # Create your models here.
 
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    description = models.CharField(max_length=100, default='')
+    email = models.CharField(max_length=75, default='')
+
+    def __str__(self):
+        return self.user.username
+
+
 class Category(models.Model):
     name = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.name
 
 
 class Style(models.Model):
@@ -36,14 +54,8 @@ class Site(models.Model):
     def __str__(self):
         return self.name
 
-    # ! The form_valid method is for class based views in views.py -- please delete this function
-    # Assigning a specific site to a user
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    # TODO: ADD get_absolute_url method for this Model
+    def get_absolute_url(self):
+        return reverse('sites_detail', kwargs={'site_id': self.id})
 
     class Meta:
         ordering = ('-pub_date',)
@@ -52,7 +64,6 @@ class Site(models.Model):
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    # submission = models.ManyToManyField(Submission)
 
     def __str__(self):
         return f"Photo for site_id: {self.site_id} @{self.url}"
@@ -71,13 +82,14 @@ class Submission(models.Model):
     def __str__(self):
         return self.statement
 
-    # TODO: ADD get_absolute_url method this Model
-# this is the random comment
+    def get_absolute_url(self):
+        return reverse('submission_detail', kwargs={'submission_id': self.id})
 
 
 class Comment(models.Model):
     site = models.ForeignKey(
         Site, on_delete=models.CASCADE, related_name='comments')
+    # ! TODO: CHANGE username field to 1:M relationship where a User has many comments.
     username = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -85,13 +97,28 @@ class Comment(models.Model):
     def __str__(self):
         return 'Comment by: {}'.format(self.username)
 
+    def get_absolute_url(self):
+        return reverse('comments_create', kwargs={'comment_id': self.id})
+
     class Meta:
         ordering = ['-created', ]
 
-    # TODO: ADD get_absolute_url method for Model
+
+class Post(models.Model):
+    title = models.CharField(max_length=50)
+    subtitle = models.CharField(max_length=50)
+    body = models.TextField(default='')
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_fields = models.TextField()
 
 
-# class Blog(models.Model):
+class UserForm(ModelForm):
+    username = forms.CharField(max_length=20)
+    first_name = forms.CharField(max_length=40)
+    last_name = forms.CharField(max_length=40)
+    email = forms.EmailField(max_length=75)
+    occupation = forms.CharField(max_length=40)
 
-
-# class User(models.Model):
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', 'occupation']
