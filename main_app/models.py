@@ -2,8 +2,17 @@ from django.db import models
 from django.urls import reverse
 from datetime import date, datetime
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 
 # Create your models here.
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    description = models.CharField(max_length=100, default='')
+    email = models.CharField(max_length=75, default='')
+
+    def __str__(self):
+        return self.user.username
 
 
 class Category(models.Model):
@@ -36,14 +45,8 @@ class Site(models.Model):
     def __str__(self):
         return self.name
 
-    # ! The form_valid method is for class based views in views.py -- please delete this function
-    # Assigning a specific site to a user
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super().form_valid(form)
-
-    # TODO: ADD get_absolute_url method for this Model
+    def get_absolute_url(self):
+        return reverse('sites_detail', kwargs={'site_id': self.id})
 
     class Meta:
         ordering = ('-pub_date',)
@@ -71,13 +74,13 @@ class Submission(models.Model):
     def __str__(self):
         return self.statement
 
-    # TODO: ADD get_absolute_url method this Model
-# this is the random comment
+    def get_absolute_url(self):
+        return reverse('submission_detail', kwargs={'submission_id': self.id})
 
 
-class Comment(models.Model):
-    site = models.ForeignKey(
-        Site, on_delete=models.CASCADE, related_name='comments')
+class Comment(models.Model): 
+    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
+    # ! TODO: CHANGE username field to 1:M relationship where a User has many comments.
     username = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
@@ -85,13 +88,16 @@ class Comment(models.Model):
     def __str__(self):
         return 'Comment by: {}'.format(self.username)
 
+    def get_absolute_url(self):
+        return reverse('comments_create', kwargs={'comment_id': self.id})
+
     class Meta:
         ordering = ['-created', ]
 
-    # TODO: ADD get_absolute_url method for Model
+    # ? TODO: ADD get_absolute_url method for Model
 
 
-# class Blog(models.Model):
+# TODO: CREATE Post Model with title, subtitle, body, author (1:M where a User has many Posts), and created fields
 
 
-# class User(models.Model):
+# TODO: CREATE class User(models.Model):
