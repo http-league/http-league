@@ -7,6 +7,7 @@ from django.db.models.signals import post_save
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms import ModelForm
 
 # Create your models here.
 
@@ -22,6 +23,8 @@ class Profile(models.Model):
 class Category(models.Model):
     name = models.CharField(max_length=25)
 
+    def __str__(self):
+        return self.name
 
 class Style(models.Model):
     name = models.CharField(max_length=25)
@@ -59,7 +62,6 @@ class Site(models.Model):
 class Photo(models.Model):
     url = models.CharField(max_length=200)
     site = models.ForeignKey(Site, on_delete=models.CASCADE)
-    # submission = models.ManyToManyField(Submission)
 
     def __str__(self):
         return f"Photo for site_id: {self.site_id} @{self.url}"
@@ -98,22 +100,16 @@ class Comment(models.Model):
     class Meta:
         ordering = ['-created', ]
 
-    # ? TODO: ADD get_absolute_url method for Model
-
-
-# TODO: CREATE Post Model with title, subtitle, body, author (1:M where a User has many Posts), and created fields
 
 class Post(models.Model):
     title = models.CharField(max_length=50)
     subtitle = models.CharField(max_length=50)
     body = models.TextField(default='')
-    author = models.CharField(max_length=50)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_fields = models.TextField()
+    
 
-
-
-# TODO: CREATE class User(models.Model):
-ModelForm = forms.ModelForm
-class FullUserForm(UserCreationForm):
+class UserForm(ModelForm):
     username = forms.CharField(max_length=20)
     first_name = forms.CharField(max_length=40)
     last_name = forms.CharField(max_length=40)
