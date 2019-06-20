@@ -77,6 +77,7 @@ class Submission(models.Model):
     category = models.ManyToManyField(Category)
     style = models.ForeignKey(Style, on_delete=models.CASCADE)
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
+    #! The photo relationship is 1:M where a Submission or Site has many photos and the photos belong to only one submission or site.
     photo = models.ManyToManyField(Photo)
 
     def __str__(self):
