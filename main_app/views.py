@@ -31,12 +31,11 @@ def admin_check(user):
 
 class SiteCreate(CreateView):
     model = Site
-    fields = '__all__'
+    fields = ['name', 'url',
+              'category', 'style', 'tech_stack']
 
     def form_valid(self, form):
-        # assigned the logged in user (self.request.user)
         form.instance.user = self.request.user
-        # Let the form work as normal
         return super().form_valid(form)
 
 
@@ -55,32 +54,10 @@ class SubmissionList(ListView):
     model = Submission
 
 
-class SubmissionCreate(FormView):
+class SubmissionCreate(CreateView):
     model = Submission
-    fields = '__all__'
-    form_class = SubmissionForm
-    template_name = 'main_app/submission_form.html'
-
-    def post(self, request, submission_id, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        files = request.FILES.getlist('photo-files')
-        if form.is_valid():
-            for f in files:
-                s3 = boto3.client('s3')
-                key = uuid.uuid4().hex[:4] + f.name[f.name.rfind('.'):]
-                try:
-                    s3.upload_fileobj(f, BUCKET, key)
-                    url = f"{S3_BASE_URL}{key}"
-                    photo = Photo(url=url, submission_id=submission_id)
-                    photo.save()
-                except:
-                    print('An error occurred uploading file to S3')
-            return self.form_valid(form)
-        else:
-            return self.form_invalid(form)
-
-        return redirect('submission_detail', submission_id=submission_id)
+    fields = ['site_name', 'url', 'statement',
+              'category', 'style', 'tech_stack']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -117,7 +94,8 @@ class SubmissionDelete(DeleteView):
 
 # TODO: FINISH home.html template
 def home(request):
-    return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
+    sites = Site.objects.all()
+    return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'sites': sites, 'year': year})
 
 
 # TODO: FINISH about.html template
@@ -131,8 +109,9 @@ def blog_index(request):
 
 
 # TODO: FINISH sites/detail.html
-def sites_detail(request):
-    return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
+def sites_detail(request, site_id):
+    site = Site.objects.get(id=site_id)
+    return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'site': site, 'year': year})
 
 
 def category_detail(request):
@@ -141,7 +120,6 @@ def category_detail(request):
 
 def submissions_detail(request, submission_id):
     submission = Submission.objects.get(id=submission_id)
-
     return render(request, 'main_app/submission_detail.html', {'title': 'Submission · HTTP League', 'submission': submission, 'year': year})
 
 # def signup(request):
@@ -157,3 +135,33 @@ def submissions_detail(request, submission_id):
 #     form = UserCreationForm()
 #     context = {'form': form, 'error_message': error_message}
 #     return render(request, 'registration/signup.html', context)
+
+
+def add_site_photo(request, site_id):
+    files = request.FILES.getlist('photo-files')
+    for f in files:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:4] + f.name[f.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(f, BUCKET, key)
+            url = f"{S3_BASE_URL}{key}"
+            photo = Photo(url=url, site_id=site_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('sites_detail', site_id=site_id)
+
+
+def add_sub_photo(request, submission_id):
+    files = request.FILES.getlist('photo-files')
+    for f in files:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:4] + f.name[f.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(f, BUCKET, key)
+            url = f"{S3_BASE_URL}{key}"
+            photo = Photo(url=url, submission_id=submission_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('submission_detail', submission_id=submission_id)

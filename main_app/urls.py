@@ -17,7 +17,7 @@ urlpatterns = [
     # Sites
 
     # // TODO: SETUP Site Views
-    path('sites/<int:site_id>/', views.sites_detail, name='detail'),
+    path('sites/<int:site_id>/', views.sites_detail, name='sites_detail'),
     path('sites/create/', views.SiteCreate.as_view(), name='sites_create'),
     path('sites/<int:pk>/update/', views.SiteUpdate.as_view(), name='sites_update'),
     path('sites/<int:pk>/delete/', views.SiteDelete.as_view(), name='sites_delete'),
@@ -37,7 +37,7 @@ urlpatterns = [
     # path('accounts/signup', views.signup, name='signup'),
 
     # # Submissions/Community
-    path('community/', views.SubmissionList.as_view(), name='submission_index'),
+    path('submissions/', views.SubmissionList.as_view(), name='submission_index'),
 
     # TODO Create a Submission_detail view
     path('submissions/<int:submission_id>/',
@@ -52,4 +52,10 @@ urlpatterns = [
 
     # TODO Create a success_delete view
     # path('success/', views.success_delete, name='success'),
+
+    path('sites/<int:site_id>/add_site_photo/',
+         views.add_site_photo, name='add_site_photo'),
+
+    path('submissions/<int:submission_id>/add_sub_photo/',
+         views.add_sub_photo, name='add_sub_photo'),
 ]
