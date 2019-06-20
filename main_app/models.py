@@ -2,22 +2,24 @@ from django.db import models
 from django.urls import reverse
 from datetime import date, datetime
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.forms import ModelForm
 
+# from django.apps import AppConfig
+
 # Create your models here.
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=100, default='')
-    email = models.CharField(max_length=75, default='')
+    bio = models.CharField(max_length=100, default='')
+    email = models.EmailField(max_length=75)
+    image = models.ImageField(default='default.jpg', upload_to='profile.pics')
 
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} Profile'
 
 
 class Category(models.Model):
