@@ -7,7 +7,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.forms import ModelForm
 
-# from django.apps import AppConfig
+from django.apps import AppConfig
 
 # Create your models here.
 
@@ -15,8 +15,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=100, default='')
     email = models.EmailField(max_length=75)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')\
     def __str__(self):
         return f'{self.user.username} Profile'
 
