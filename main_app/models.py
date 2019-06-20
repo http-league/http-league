@@ -6,6 +6,7 @@ from django.db.models.signals import post_save
 
 # Create your models here.
 
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     description = models.CharField(max_length=100, default='')
@@ -69,6 +70,7 @@ class Submission(models.Model):
     category = models.ManyToManyField(Category)
     style = models.ForeignKey(Style, on_delete=models.CASCADE)
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
+    #! The photo relationship is 1:M where a Submission or Site has many photos and the photos belong to only one submission or site.
     photo = models.ManyToManyField(Photo)
 
     def __str__(self):
@@ -78,8 +80,9 @@ class Submission(models.Model):
         return reverse('submission_detail', kwargs={'submission_id': self.id})
 
 
-class Comment(models.Model): 
-    site = models.ForeignKey(Site, on_delete=models.CASCADE, related_name='comments')
+class Comment(models.Model):
+    site = models.ForeignKey(
+        Site, on_delete=models.CASCADE, related_name='comments')
     # ! TODO: CHANGE username field to 1:M relationship where a User has many comments.
     username = models.CharField(max_length=100)
     body = models.TextField()

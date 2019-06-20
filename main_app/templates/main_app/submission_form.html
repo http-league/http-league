@@ -1,11 +1,9 @@
 {% extends "../layout.html" %}
 {% block content %}
     <h1>Submission Create</h1>
-    <form action="post">
+    <form action="" enctype="multipart/form-data" method="POST">
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
+        {{ form.as_p }}
         <input type="submit" value="Submit!">
     </form>
 

@@ -1,20 +1,23 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.views.generic import ListView, DetailView, View
 
 
 from datetime import datetime
-# from .form import *
+from .form import *
 from .mixins import *
 from django.contrib.auth import login
 # from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+import uuid
+import boto3
 from .models import *
-
 # Create your views here.
 
+BUCKET = 'httpleague'
+S3_BASE_URL = f'https://{BUCKET}.s3.amazonaws.com/'
 
 today = datetime.today()
 year = datetime.now().year
@@ -52,10 +55,36 @@ class SubmissionList(ListView):
     model = Submission
 
 
-class SubmissionCreate(CreateView):
+class SubmissionCreate(FormView):
     model = Submission
-    fields = ['site_name', 'url', 'statement',
-              'category', 'style', 'tech_stack', 'photo']
+    fields = '__all__'
+    form_class = SubmissionForm
+    template_name = 'main_app/submission_form.html'
+
+    def post(self, request, submission_id, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        files = request.FILES.getlist('photo-files')
+        if form.is_valid():
+            for f in files:
+                s3 = boto3.client('s3')
+                key = uuid.uuid4().hex[:4] + f.name[f.name.rfind('.'):]
+                try:
+                    s3.upload_fileobj(f, BUCKET, key)
+                    url = f"{S3_BASE_URL}{key}"
+                    photo = Photo(url=url, submission_id=submission_id)
+                    photo.save()
+                except:
+                    print('An error occurred uploading file to S3')
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+        return redirect('submission_detail', submission_id=submission_id)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class SubmissionDelete(DeleteView):
@@ -108,6 +137,12 @@ def sites_detail(request):
 
 def category_detail(request):
     return render(request, 'category/detail.html', {'title': 'Category · HTTP League', 'year': year})
+
+
+def submissions_detail(request, submission_id):
+    submission = Submission.objects.get(id=submission_id)
+
+    return render(request, 'main_app/submission_detail.html', {'title': 'Submission · HTTP League', 'submission': submission, 'year': year})
 
 # def signup(request):
 #     error_message = ''
