@@ -106,6 +106,7 @@ def sites_detail(request):
 
 
 def category_detail(request):
+    
     return render(request, 'category/detail.html', {'title': 'Category · HTTP League', 'year': year})
 
 # def signup(request):
