@@ -17,7 +17,7 @@ class Profile(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=25)
-
+# TODO: __str__ method to return Category name
 
 class Style(models.Model):
     name = models.CharField(max_length=25)
