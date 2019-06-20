@@ -1,7 +1,10 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date, datetime
+
 from django.contrib.auth.models import User
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -11,11 +14,19 @@ from django.apps import AppConfig
 
 # Create your models here.
 
+
+@receiver(post_save, sender=User)
+def ensure_profile_exists(sender, **kwargs):
+    if kwargs.get('created', False):
+        Profile.objects.get_or_create(user=kwargs.get('instance'))
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=100, default='')
     email = models.EmailField(max_length=75)
-    image = models.ImageField(default='default.jpg', upload_to='profile_pics')\
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    
     def __str__(self):
         return f'{self.user.username} Profile'
 
