@@ -47,5 +47,5 @@ urlpatterns = [
     # OTHER
 
     # TODO Create a success_delete view
-    # path('success/', views.success_delete, name='success'),
+    # path('dsuccess/', views.success_delete, name='dsuccess'),
 ]
