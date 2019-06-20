@@ -4,6 +4,10 @@ from datetime import date, datetime
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 
+from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
 # Create your models here.
 
 class Profile(models.Model):
@@ -106,4 +110,16 @@ class Post(models.Model):
     author = models.CharField(max_length=50)
 
 
+
 # TODO: CREATE class User(models.Model):
+ModelForm = forms.ModelForm
+class FullUserForm(UserCreationForm):
+    username = forms.CharField(max_length=20)
+    first_name = forms.CharField(max_length=40)
+    last_name = forms.CharField(max_length=40)
+    email = forms.EmailField(max_length=75)
+    occupation = forms.CharField(max_length=40)
+
+    class Meta:
+        model = User
+        fields = ['username', 'first_name', 'last_name', 'email', 'occupation']
