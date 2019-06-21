@@ -4,6 +4,9 @@
 
 HTTP League is designed with aspiring developers in mind. We wanted to create a place where new developers can submit a website of their own, where when posted other authorized users are able to provide feedback on the site that was submitted. If you are not necessarily looking to submit a site yet then we are also providing a section where users are able to browse other predetermined sites for inspiration on their next project.
 
+## Screenshots
+(First)[https://imgur.com/2Zqdv2e.png]
+
 ## Technologies
 
 - [Python 3](https://www.python.org/download/releases/3.0/)
