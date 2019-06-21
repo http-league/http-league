@@ -53,6 +53,7 @@
         </header>
         
         <!--TODO: add main content container -->
+
         <main class="cd-masthead" role="main">
             <div class="container">
                 <div class="row align-items-center">
@@ -80,6 +81,10 @@
                     <a href="https://github.com/http-league/http-league/graphs/contributors">our contributors</a>.</p>
             </div>
         </footer>
+
+        {% block content %}{% endblock %}
+        <script src="{% static 'js/menu.js' %}"></script>
+
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     </body>
 

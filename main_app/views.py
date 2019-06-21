@@ -1,20 +1,23 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
+from django.views.generic import ListView, DetailView, View
 
 
 from datetime import datetime
-# from .form import *
+from .form import *
 from .mixins import *
 from django.contrib.auth import login
-# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+import uuid
+import boto3
 from .models import *
-
 # Create your views here.
 
+BUCKET = 'httpleague'
+S3_BASE_URL = f'https://{BUCKET}.s3.amazonaws.com/'
 
 today = datetime.today()
 year = datetime.now().year
@@ -28,12 +31,10 @@ def admin_check(user):
 
 class SiteCreate(isAdminMixin, CreateView):
     model = Site
-    fields = '__all__'
+    form_class = SiteCreateForm
 
     def form_valid(self, form):
-        # assigned the logged in user (self.request.user)
         form.instance.user = self.request.user
-        # Let the form work as normal
         return super().form_valid(form)
 
 
@@ -48,16 +49,22 @@ class SiteDelete(isAdminMixin, UpdateView):
 
 
 # // TODO: Submission Class Based Views -- List, CD
-class SubmissionList(ListView):
+
+class SubmissionList(LoginRequiredMixin, ListView):
     model = Submission
 
 
 class SubmissionCreate(LoginRequiredMixin, CreateView):
     model = Submission
-    fields = '__all__'
+    form_class = SubmissionCreateForm
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        print(f'{form}')
+        return super().form_valid(form)
 
 
-class SubmissionDelete(isAdminMixin, DeleteView):
+class SubmissionDelete(LoginRequiredMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
@@ -85,9 +92,11 @@ class SubmissionDelete(isAdminMixin, DeleteView):
 #     model = Post
 #     success_url = '/blog/'
 
-# TODO: FINISH home.html template
+# // TODO: FINISH home.html template
 def home(request):
-    return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
+    sites = Site.objects.all()
+    print(f'{sites}')
+    return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'sites': sites, 'year': year})
 
 
 # TODO: FINISH about.html template
@@ -100,25 +109,61 @@ def blog_index(request):
     return render(request, 'blog/post_list.html', {'title': 'Blog · HTTP League', 'year': year})
 
 
-# TODO: FINISH sites/detail.html
-def sites_detail(request):
-    return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'year': year})
+# // TODO: FINISH sites/detail.html
+def sites_detail(request, site_id):
+    site = Site.objects.get(id=site_id)
+    return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'site': site, 'year': year})
 
 
-def category_detail(request):
-    
-    return render(request, 'category/detail.html', {'title': 'Category · HTTP League', 'year': year})
+# def category_detail(request):
 
-# def signup(request):
-#     error_message = ''
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('index')
-#         else:
-#             error_message = 'Invalid sign up - try again'
-#     form = UserCreationForm()
-#     context = {'form': form, 'error_message': error_message}
-#     return render(request, 'registration/signup.html', context)
+#     return render(request, 'category/detail.html', {'title': 'Category · HTTP League', 'sites': site, 'year': year})
+
+
+def submissions_detail(request, submission_id):
+    submission = Submission.objects.get(id=submission_id)
+    return render(request, 'main_app/submission_detail.html', {'title': 'Submission · HTTP League', 'submission': submission, 'year': year})
+
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
+
+
+def add_site_photo(request, site_id):
+    files = request.FILES.getlist('photo-files')
+    for f in files:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:4] + f.name[f.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(f, BUCKET, key)
+            url = f"{S3_BASE_URL}{key}"
+            photo = Photo(url=url, site_id=site_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('sites_detail', site_id=site_id)
+
+
+def add_sub_photo(request, submission_id):
+    files = request.FILES.getlist('photo-files')
+    for f in files:
+        s3 = boto3.client('s3')
+        key = uuid.uuid4().hex[:4] + f.name[f.name.rfind('.'):]
+        try:
+            s3.upload_fileobj(f, BUCKET, key)
+            url = f"{S3_BASE_URL}{key}"
+            photo = Photo(url=url, submission_id=submission_id)
+            photo.save()
+        except:
+            print('An error occurred uploading file to S3')
+    return redirect('submission_detail', submission_id=submission_id)

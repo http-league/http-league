@@ -14,3 +14,7 @@ ul.addEventListener('click', handleClick);
 function handleClick(e) {
     console.log(e.target);
 }
+
+function menuToggle(x) {
+    x.classList.toggle("change");
+}

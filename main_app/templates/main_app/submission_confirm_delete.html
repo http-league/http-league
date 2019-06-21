@@ -1,4 +1,9 @@
 {% extends "../layout.html" %}
 {% block content %}
     <h1>Delete Submission</h1>
+
+    <h4>Are you sure you want to
+        <span class="text-danger">delete</span>
+        <span>{{ object.name }}</span>?
+    </h4>
 {% endblock %}

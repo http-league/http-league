@@ -1,24 +1,35 @@
 from django.db import models
 from django.urls import reverse
 from datetime import date, datetime
+
 from django.contrib.auth.models import User
+from django.dispatch import receiver
 from django.db.models.signals import post_save
 
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 from django.forms import ModelForm
+
+from django.apps import AppConfig
 
 # Create your models here.
 
 
+
+@receiver(post_save, sender=User)
+def ensure_profile_exists(sender, **kwargs):
+    if kwargs.get('created', False):
+        Profile.objects.get_or_create(user=kwargs.get('instance'))
+
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    description = models.CharField(max_length=100, default='')
-    email = models.CharField(max_length=75, default='')
-
+    bio = models.CharField(max_length=100, default='')
+    email = models.EmailField(max_length=75)
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    
     def __str__(self):
-        return self.user.username
+        return f'{self.user.username} Profile'
 
 
 class Category(models.Model):
@@ -77,7 +88,8 @@ class Submission(models.Model):
     category = models.ManyToManyField(Category)
     style = models.ForeignKey(Style, on_delete=models.CASCADE)
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
-    photo = models.ManyToManyField(Photo)
+    photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return self.statement

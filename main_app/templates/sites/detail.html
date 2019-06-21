@@ -1,4 +1,31 @@
 {% extends "../layout.html" %}
 {% block content %}
-    <h1>Site Detail</h1>
+    {% for photo in site.photo_set.all %}
+       <article class="post-single">
+        <a href="{{ site.url }}" target="_blank">
+            <img src="{{ photo.url }}" alt="{{ site.name }}">
+        </a>
+        <div class="flex post-meta">
+            <div>
+
+                <h6>{{site.name}}</h6>
+            </div>
+            <div><p>{{ site.category_set }}</p></div>
+            <div><p>{{ site.pub_date|date:"M d Y" }}</p></div>
+        </div>
+       </article>
+        {% empty %}
+        <h1>
+            There are no photos yet
+        </h1>
+        <label for="photos">Upload Photos</label>
+        <form name="photos" action="{% url 'add_site_photo' site.id %}" enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <input multiple name="photo-files" type="file">
+            <br><br>
+            <input class="btn" type="submit" value="Upload Photo">
+        </form>
+    {% endfor %}
+
+
 {% endblock %}

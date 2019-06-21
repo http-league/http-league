@@ -1,4 +1,4 @@
-@import './typography.scss', './colors.scss';
+@import './typography.scss', './colors.scss', './utilities.scss';
 /*------------------------------------*\
     # Type
 \*------------------------------------*/
@@ -13,6 +13,7 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
+    overflow-x: hidden;
 }
 
 
@@ -217,7 +218,7 @@ nav {
     font-family: $inter;
     font-size: 24px;
     background-color: $primary;
-    border-right: 3px solid $secondary;
+   
 
 }
 
@@ -225,12 +226,33 @@ nav section {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-top: 4rem;
+    margin-top: 8rem;
 }
 
 nav a {
     margin: 4px 32px;
 }
+.logo {
+    width: 150px;
+}
+.logo div {
+    width: 102px;
+    height: 20px;
+    background: url('../img/logo.svg') no-repeat center;
+    
+}
+
+header {
+    justify-content: space-between;
+padding: 20px 21px 20px;
+height: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 15;
+}
+
 
 /*------------------------------------*\
     # Main Content
@@ -241,23 +263,138 @@ main {
     z-index: 1;
     background-color: $primary;
     min-height: 100vh;
-    transition: transform 0.5s;
-
+    transition: transform 0.5s; 
+    padding-top: 70px;
 }
 .open {
     transform: translate(275px, 0);
 }
+// a.toggle-nav {
+//     min-width: 100vw;
+//     z-index: 2;
+//     position: fixed;
+//     top:0;
+//     left:0;
+//     padding: 20px 21px 20px;
 
+// }
+.grid {
+    padding: 0 20px;
+}
+.flex {
+    display: flex;
+    flex-flow: row wrap;
+}
 
 
 /*------------------------------------*\
+    # Site/Submission
+\*------------------------------------*/
+article {
+    display: block;
+}
+.post {
+    flex-basis: 100%;
+}
+.post-single {
+    max-width: 782px;
+    padding: 25px;
+    margin: 0 auto;
+    min-height: calc(100vh - 6rem);
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+}
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+.post img, .post-single img {
+    width: 732px;
+    border: 1px solid #000;
+}
+.post h6 {
+    padding: 7px 0 25px 25px
+}
+
+h6 {
+    font-size: .1.0625em;
+    font-weight: 500;
+    margin: 0;
+}
+.post-meta p {
+    margin-top: 5px;
+    padding-left: 25px;
+    color: darken($secondary, 30%);
+}
+.post-meta h6 {
+    line-height: 1.5em;
+    margin-top: 5px;
+    padding-left: 25px;
+}
+
+
+/*------------------------------------*\
+    # Site Create
+\*------------------------------------*/
+.submit h6 {
+    margin-bottom: 2rem;
+}
+input, .input, .select-multiple, .select {
+    display: block;
+    margin: 1rem 0 4rem 0;
+    padding: 10px 0;
+    font-size: $base-font-size;
+    color: $secondary;
+    font-family: inherit;
+    width: 100%;
+    background: none;
+    border: 0;
+    outline: none;
+    border-bottom: 1px solid darken($secondary, 70%);
+}
+select[multiple]:focus option:checked {
+  background: white linear-gradient(0deg, grey 0%, grey 100%);
+  
+}
+select[multiple] option:checked {
+    color: $primary;
+}
+
+button, .button {
+    border: 0;
+    font-size: $base-font-size * 1.2;
+    font-family: inherit;
+    display: inline-block;
+    padding: 10px 0;
+    cursor: pointer;
+    outline: none;
+}
+/*------------------------------------*\
     # Footer
 \*------------------------------------*/
-
+footer p {
+    padding: 0 20px;
+}
 footer {
-    position: fixed;
+    text-align: right;
     bottom: 0;
-    left: 0;
+    right: 0;
+}
+
+@media (min-width: 790px) {
+    .post {
+        flex-basis: 50%;
+    }
+    .post h6 {
+        height: 70px;
+    }
+}
+@media (min-width: 1450px) {
+    .post {
+        flex-basis: 33.3%;
+    }
 }
 
 

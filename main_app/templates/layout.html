@@ -9,34 +9,51 @@
         <script src="https://kit.fontawesome.com/632585e591.js"></script>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-        <title>{{ title }}</title>
+        <title>{% if title %}{{ title }} {% else %}
+            HTTP League · Web Design Repo {% endif %}</title>
     </head>
     <nav>
         <section>
             <a href="/">Home</a>
             <a href="{% url 'main_about' %}">About</a>
             <a href="{% url 'blog' %}">Blog</a>
-            <a href="/">Community</a>
+            <a href="{% url 'submission_index' %}">Community</a>
             <a href="{% url 'cup_home' %}">Cup</a>
-
+            <a href="{% url 'submission_create' %}">
+                Submit a site
+            </a>
+            <a href="category/1"></a>
         </section>
     </nav>
-
-    <main>
+    <header class="flex">
         <a class="toggle-nav" href="#">
-            Menu
+            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172"
+                style=" fill:#fafafa;">
+                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
+                    stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
+                    font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                    <path d="M0,172v-172h172v172z" fill="none"></path>
+                    <g fill="#fafafa">
+                        <g id="surface1">
+                            <path
+                                d="M0,14.33333v14.33333h172v-14.33333zM0,78.83333v14.33333h172v-14.33333zM0,143.33333v14.33333h172v-14.33333z">
+                            </path>
+                        </g>
+                    </g>
+                </g>
+            </svg>
         </a>
-        <div id="overlay"></div>
-
+        <a href="/" class="logo">
+           <img src="{% static 'img/logo.svg' %}" alt="">
+            </a>
+        
+    </header>
+    <main>
         {% block content %}{% endblock content %}
-        <footer>
-            <p>All Rights Reserved, &copy;
-                {{ year }}</p>
-        </footer>
+
     </main>
     <body>
         <script src="{% static 'js/menu.js' %}"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     </body>
 
 </html>

@@ -1,0 +1,18 @@
+@import './typography.scss', './colors.scss';
+
+/*------------------------------------*\
+    # Utilities
+\*------------------------------------*/
+
+.text-primary {
+    color: $primary;
+}
+.text-danger {
+    color: $danger;
+}
+.text-success {
+    color: $success;
+}
+.text-warning{
+    color: $warning;
+}
