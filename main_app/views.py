@@ -7,7 +7,7 @@ from datetime import datetime
 from .form import *
 from .mixins import *
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -124,17 +124,18 @@ def submissions_detail(request, submission_id):
     submission = Submission.objects.get(id=submission_id)
     return render(request, 'main_app/submission_detail.html', {'title': 'Submission · HTTP League', 'submission': submission, 'year': year})
 
+
 def signup(request):
     error_message = ''
     if request.method == 'POST':
-        form = UserCreationForm(request.POST)
+        form = UserFullForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
             return redirect('home')
         else:
             error_message = 'Invalid sign up - try again'
-    form = UserCreationForm()
+    form = UserFullForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
