@@ -1,0 +1,72 @@
+
+
+/*------------------------------*\
+    CUP STYLES
+\*-------------------------------*/
+
+//Header
+
+// SIDEBAR
+.wrapper {
+    padding-top: 4rem;
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100vh;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+.sidebar-header h3{
+    margin: 0;
+}
+
+.sidebar-header {
+    margin-top: .5rem;
+    padding: 58px 20px;
+}
+
+
+// Footer 
+footer {
+    bottom: 0;
+    left: 0;
+}
+
+.cd-footer {
+    font-size: .875rem;
+    background-color: #f7f7f7;
+}
+
+.cd-footer-links {
+    padding-left: 0;
+    margin-bottom: 1rem;
+}
+
+
+// Utilities
+svg {
+    overflow: hidden;
+    vertical-align: middle;
+}
+.bg-cup {
+    background-color: #101010;
+}
+
+
+// Media Queries
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -250px;
+    }
+    #sidebar.active {
+        margin-left: 0;
+    }
+}
