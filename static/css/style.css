@@ -310,9 +310,14 @@ nav section {
   flex-direction: column;
   justify-content: center;
   margin-top: 8rem;
+  padding-top: 2rem;
 }
 
-nav a {
+nav section a, nav section p {
+  padding: .5rem;
+}
+
+nav a, nav p {
   margin: 4px 32px;
 }
 
@@ -435,6 +440,9 @@ input, .input, .select-multiple, .select {
   border: 0;
   outline: none;
   border-bottom: 1px solid #484848;
+}
+.select-multiple {
+  height: 10rem;
 }
 
 select[multiple]:focus option:checked {

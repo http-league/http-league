@@ -2,16 +2,25 @@
 
 {% block content %}
 
-    <h1>Sign Up</h1>
 
-    {% if error_message %}
-        <p class="red-text">{{ error_message }}</p>
-    {% endif %}
+    <section class="post-single">
+        <div class="submit">
+            {% if error_message %}
+                <p class="red-text">{{ error_message }}</p>
+            {% endif %}
+            <h6 class="submit-title">Sign Up</h6>
+            <form action="{% url 'signup' %}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="field">
+                        <label for="{{ field.id_for_label}}">{{field.html_name }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <button class="button" type="submit" value="Sign Up">Sign Up</button>
 
-    <form method="post" action="{% url 'signup' %}">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input class="btn" type="submit" value="signup">
-    </form>
+            </form>
+        </div>
+    </section>
 
 {% endblock %}

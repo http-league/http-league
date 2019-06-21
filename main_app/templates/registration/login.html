@@ -2,20 +2,20 @@
 
 {% block content %}
 
-<section class="post-single">
-    <div class="submit">
-        <h6 class="submit-title">Log In</h6>
-        <form class="flexz" action="{% url 'login' %}" method="POST"> 
-            {% csrf_token %}
-            {% for field in form %}
-            <div class="field">
-                <label for="{{ field.id_for_label}}">{{field.html_name }}</label>
-                {{ field }}
-            </div>
-            {% endfor %}
-            <input class="button" type="submit" value="Submit">
-            <input type="hidden" name="submitted" id="submitted" value="true">
-        </form>
-    </div>
-</section>
+    <section class="post-single">
+        <div class="submit">
+            <h6 class="submit-title">Log In</h6>
+            <form action="{% url 'login' %}" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="field">
+                        <label for="{{ field.id_for_label}}">{{field.html_name }}</label>
+                        {{ field }}
+                    </div>
+                {% endfor %}
+                <button class="button" type="submit">Submit</button>
+                <input id="submitted" name="submitted" type="hidden" value="true">
+            </form>
+        </div>
+    </section>
 {% endblock %}

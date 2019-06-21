@@ -9,49 +9,61 @@
         <script src="https://kit.fontawesome.com/632585e591.js"></script>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-        <title>{% if title %}{{ title }} {% else %}
-            HTTP League · Web Design Repo {% endif %}</title>
+        <title>
+            {% if title %}
+                {{ title }}
+            {% else %}
+                HTTP League · Web Design Repo
+            {% endif %}
+        </title>
     </head>
     <nav>
         <section>
+            {% if user.is_authenticated %}
+                <p>Welcome back,
+                    {{ user.username }}!
+                </p>
+            {% endif %}
             <a href="/">Home</a>
             <a href="{% url 'submission_index' %}">Community</a>
             <a href="{% url 'cup_home' %}">Cup</a>
             {% if user.is_authenticated %}
-            <a href="{% url 'submission_create' %}">
-                Submit a site
-            </a>
-            <br>
-            <a href="{% url 'logout' %}">Log Out</a>
+                <a href="{% url 'submission_create' %}">
+                    Submit a site
+                </a>
+                <br>
+                {% if user.is_superuser %}
+                    <a href="{% url 'sites_create' %}">Add a Site</a>
             {% else %}
-            <br>
-            <a href="{% url 'signup' %}">Sign Up</a>
-            <a href="{% url 'login'%}">Log In</a>
+
+                {% endif %}
+                <br>
+                <a href="{% url 'logout' %}">Log Out</a>
+                <br>
+            {% else %}
+                <br>
+                <a href="{% url 'signup' %}">Sign Up</a>
+                <a href="{% url 'login'%}">Log In</a>
             {% endif %}
         </section>
     </nav>
     <header class="flex">
         <a class="toggle-nav" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="24" height="24" viewBox="0 0 172 172"
-                style=" fill:#fafafa;">
-                <g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter"
-                    stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none"
-                    font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+            <svg height="24" style=" fill:#fafafa;" viewbox="0 0 172 172" width="24" x="0px" xmlns="http://www.w3.org/2000/svg" y="0px">
+                <g fill-rule="nonzero" fill="none" font-family="none" font-size="none" font-weight="none" stroke-dasharray="" stroke-dashoffset="0" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-width="1" stroke="none" style="mix-blend-mode: normal" text-anchor="none">
                     <path d="M0,172v-172h172v172z" fill="none"></path>
                     <g fill="#fafafa">
                         <g id="surface1">
-                            <path
-                                d="M0,14.33333v14.33333h172v-14.33333zM0,78.83333v14.33333h172v-14.33333zM0,143.33333v14.33333h172v-14.33333z">
-                            </path>
+                            <path d="M0,14.33333v14.33333h172v-14.33333zM0,78.83333v14.33333h172v-14.33333zM0,143.33333v14.33333h172v-14.33333z"></path>
                         </g>
                     </g>
                 </g>
             </svg>
         </a>
-        <a href="/" class="logo">
-           <img src="{% static 'img/logo.svg' %}" alt="">
-            </a>
-        
+        <a class="logo" href="/">
+            <img src="{% static 'img/logo.svg' %}" alt="">
+        </a>
+
     </header>
     <main>
         {% block content %}{% endblock content %}
