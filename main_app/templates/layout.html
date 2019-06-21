@@ -9,7 +9,8 @@
         <script src="https://kit.fontawesome.com/632585e591.js"></script>
         <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-        <title>{{ title }}</title>
+        <title>{% if title %}{{ title }} {% else %}
+            HTTP League · Web Design Repo {% endif %}</title>
     </head>
     <nav>
         <section>
