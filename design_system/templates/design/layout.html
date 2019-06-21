@@ -7,14 +7,16 @@
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="ie=edge" http-equiv="X-UA-Compatible">
         <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/cup.css' %}">
         <script src="https://kit.fontawesome.com/632585e591.js"></script>
+
         <title>{{ title }}</title>
     </head>
 
     <body>
 
         <!--TODO: add header nav -->
-        <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar navbar-dark bg-dark">
+        <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar navbar-dark bg-cup">
             <a class="navbar-brand mr-0 mr-md-2 text-primary" href="/design">
                 <svg fill="none" height="36" viewbox="0 0 52 52" width="52" xmlns="http://www.w3.org/2000/svg">
                     <rect height="50" rx="5" stroke-width="2" stroke="white" width="50" x="1" y="1"/>
@@ -57,22 +59,16 @@
             <div
                 class="row flex-xl-nowrap">
                 <!--TODO: add sidbar nav -->
-                <div class="col-12 col-md-3 col-xs-2 cd-sidebar">
-                    <div class="cd-menu d-flex align-items-center">
-                        <span>Documentation</span>
-                        <button aria-controls="cd-docs-nav" aria-expanded="false" aria-label="Toggle docs navigation" class="btn btn-link cd-docs-toggle d-md-none p-0 ml-3" data-target="#cd-docs-nav" data-toggle="collapse" type="button">
-                            <svg focusable="false" height="30" role="img" viewbox="0 0 30 30" width="30" xmlns="http://www.w3.org/2000/svg">
-                                <title>Menu</title>
-                                <path d="M4 7h22M4 15h22M4 23h22" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" stroke="currentColor"></path>
-                            </svg>
-                        </button>
-                    </div>
-                    <nav class="collapse cd-links" id="cd-docs-nav">
-                        <div class="cd-toc-item">
-                            <a class="cd-toc-link" href="">
+                <nav id="sidebar">
+                    <div class="components">
+                        <div class="sidebar-header">
+                            <h3>Documentation</h3>
+                        </div>
+                        <div class="active ">
+                            <a aria-expanded="false" class=" cd-toc-link" data-toggle="collapse" href="#gettingStarted">
                                 Getting Started
                             </a>
-                            <ul class="nav cd-sidenav">
+                            <ul class="flex-column collapse nav cd-sidenav" id="gettingStarted">
                                 <li>
                                     <a href="">Introduction</a>
                                 </li>
@@ -81,36 +77,70 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="cd-toc-item">
-                            <a class="cd-toc-link" href=""></a>
-                            <ul class="nav cd-sidenav">
+                        <div class="">
+                            <a aria-expanded="false" class=" cd-toc-link" data-toggle="collapse" href="#components">Components</a>
+
+                            <ul class="flex-column collapse nav cd-sidenav" id="components">
                                 <li>
-                                    <a href=""></a>
+                                    <a href="">Buttons</a>
+                                </li>
+                                <li>
+                                    <a href="">Colors</a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="cd-toc-item">
-                            <a class="cd-toc-link" href=""></a>
-                            <ul class="nav cd-sidenav">
+                        <div class="">
+                            <a aria-expanded="false" class=" cd-toc-link" data-toggle="collapse" href="#utilities">Utilities</a>
+                            <ul class="flex-column scollapse nav cd-sidenav" id="utilities">
                                 <li>
-                                    <a href=""></a>
+                                    <a href="">Margins</a>
                                 </li>
                             </ul>
                         </div>
-                        <div class="cd-toc-item">
-                            <a class="cd-toc-link" href=""></a>
-                            <ul class="nav cd-sidenav">
+                        <div class="">
+                            <a aria-expanded="false" class=" cd-toc-link" data-toggle="collapse" href="#about">About</a>
+                            <ul class="flex-column collapse nav cd-sidenav" id="about">
                                 <li>
-                                    <a href=""></a>
+                                    <a href="">Team</a>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                </nav>
+                <main id="content" role="main">
+                    <nav class="navbar navbar-expand-lg navbar-dark">
+                        <div class="container-fluid">
+                            <button class="btn text-dark" id="sidebarCollapse" type="button">
+                                <i class="fas fa-align-left"></i>
+                            </button>
                         </div>
                     </nav>
-                </div>
+                    {% block content %}{% endblock %}
+                </main>
             </div>
         </div>
-        {% block content %}{% endblock %}
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    </body>
+        <footer class="cd-footer text-muted">
+            <div class="container-fluid p-3 p-md-5">
+                <ul class="nav cd-footer-links">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/http-league">GitHub</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://twitter.com/httpleague">Twitter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+                <p class="nav-link">Designed and built by the<a href="#">HTTP League team</a>with the help of<a href="https://github.com/http-league/http-league/graphs/contributors">our contributors</a>.</p>
+            </div>
+        </footer>
 
+        <script crossorigin="anonymous" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="{% static "js/cd-menu.js" %}"></script>
+        <!-- Popper.JS -->
+        <script crossorigin="anonymous" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script crossorigin="anonymous" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    </body>
 </html>
