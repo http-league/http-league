@@ -7,7 +7,7 @@ from datetime import datetime
 from .form import *
 from .mixins import *
 from django.contrib.auth import login
-# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -38,22 +38,23 @@ class SiteCreate(isAdminMixin, CreateView):
         return super().form_valid(form)
 
 
-class SiteUpdate(UpdateView):
+class SiteUpdate(isAdminMixin, UpdateView):
     model = Site
     fields = '__all__'
 
 
-class SiteDelete(UpdateView):
+class SiteDelete(isAdminMixin, UpdateView):
     model = Site
     success_url = '/'
 
 
 # // TODO: Submission Class Based Views -- List, CD
-class SubmissionList(ListView):
+
+class SubmissionList(LoginRequiredMixin, ListView):
     model = Submission
 
 
-class SubmissionCreate(CreateView):
+class SubmissionCreate(LoginRequiredMixin, CreateView):
     model = Submission
     form_class = SubmissionCreateForm
 
@@ -63,7 +64,7 @@ class SubmissionCreate(CreateView):
         return super().form_valid(form)
 
 
-class SubmissionDelete(DeleteView):
+class SubmissionDelete(LoginRequiredMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 

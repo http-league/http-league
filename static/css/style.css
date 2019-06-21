@@ -423,7 +423,7 @@ h6 {
   margin-bottom: 2rem;
 }
 
-.input, .select-multiple, .select {
+input, .input, .select-multiple, .select {
   display: block;
   margin: 1rem 0 4rem 0;
   padding: 10px 0;
@@ -445,7 +445,7 @@ select[multiple] option:checked {
   color: #101010;
 }
 
-.button {
+button, .button {
   border: 0;
   font-size: 19.2px;
   font-family: inherit;

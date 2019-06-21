@@ -341,7 +341,7 @@ h6 {
 .submit h6 {
     margin-bottom: 2rem;
 }
-.input, .select-multiple, .select {
+input, .input, .select-multiple, .select {
     display: block;
     margin: 1rem 0 4rem 0;
     padding: 10px 0;
@@ -362,7 +362,7 @@ select[multiple] option:checked {
     color: $primary;
 }
 
-.button {
+button, .button {
     border: 0;
     font-size: $base-font-size * 1.2;
     font-family: inherit;

@@ -3,6 +3,8 @@ from django.forms import ModelForm
 
 from .models import *
 
+
+
 class SiteCreateForm(forms.ModelForm):
     class Meta:
         model = Site
