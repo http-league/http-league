@@ -7,7 +7,7 @@ from datetime import datetime
 from .form import *
 from .mixins import *
 from django.contrib.auth import login
-# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -29,42 +29,42 @@ def admin_check(user):
 # // TODO: Site Class based views
 
 
-class SiteCreate(CreateView):
+class SiteCreate(isAdminMixin, CreateView):
     model = Site
-    fields = ['name', 'url',
-              'category', 'style', 'tech_stack']
+    form_class = SiteCreateForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
 
-class SiteUpdate(UpdateView):
+class SiteUpdate(isAdminMixin, UpdateView):
     model = Site
     fields = '__all__'
 
 
-class SiteDelete(UpdateView):
+class SiteDelete(isAdminMixin, UpdateView):
     model = Site
     success_url = '/'
 
 
 # // TODO: Submission Class Based Views -- List, CD
-class SubmissionList(ListView):
+
+class SubmissionList(LoginRequiredMixin, ListView):
     model = Submission
 
 
-class SubmissionCreate(CreateView):
+class SubmissionCreate(LoginRequiredMixin, CreateView):
     model = Submission
-    fields = ['site_name', 'url', 'statement',
-              'category', 'style', 'tech_stack']
+    form_class = SubmissionCreateForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        print(f'{form}')
         return super().form_valid(form)
 
 
-class SubmissionDelete(DeleteView):
+class SubmissionDelete(LoginRequiredMixin, DeleteView):
     def test_func(self):
         return self.request.user.is_superuser
 
@@ -92,9 +92,10 @@ class SubmissionDelete(DeleteView):
 #     model = Post
 #     success_url = '/blog/'
 
-# TODO: FINISH home.html template
+# // TODO: FINISH home.html template
 def home(request):
     sites = Site.objects.all()
+    print(f'{sites}')
     return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'sites': sites, 'year': year})
 
 
@@ -108,7 +109,7 @@ def blog_index(request):
     return render(request, 'blog/post_list.html', {'title': 'Blog · HTTP League', 'year': year})
 
 
-# TODO: FINISH sites/detail.html
+# // TODO: FINISH sites/detail.html
 def sites_detail(request, site_id):
     site = Site.objects.get(id=site_id)
     return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'site': site, 'year': year})
@@ -123,19 +124,19 @@ def submissions_detail(request, submission_id):
     submission = Submission.objects.get(id=submission_id)
     return render(request, 'main_app/submission_detail.html', {'title': 'Submission · HTTP League', 'submission': submission, 'year': year})
 
-# def signup(request):
-#     error_message = ''
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('index')
-#         else:
-#             error_message = 'Invalid sign up - try again'
-#     form = UserCreationForm()
-#     context = {'form': form, 'error_message': error_message}
-#     return render(request, 'registration/signup.html', context)
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
 
 
 def add_site_photo(request, site_id):

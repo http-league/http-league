@@ -1,9 +1,19 @@
 {% extends "../layout.html" %}
 {% block content %}
-    <h1>Site Detail
-    </h1>
     {% for photo in site.photo_set.all %}
-        <img src="{{photo.url}}">
+       <article class="post-single">
+        <a href="{{ site.url }}" target="_blank">
+            <img src="{{ photo.url }}" alt="{{ site.name }}">
+        </a>
+        <div class="flex post-meta">
+            <div>
+
+                <h6>{{site.name}}</h6>
+            </div>
+            <div><p>{{ site.category_set }}</p></div>
+            <div><p>{{ site.pub_date|date:"M d Y" }}</p></div>
+        </div>
+       </article>
         {% empty %}
         <h1>
             There are no photos yet
