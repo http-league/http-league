@@ -50,7 +50,7 @@ class SiteDelete(isAdminMixin, UpdateView):
 
 # // TODO: Submission Class Based Views -- List, CD
 
-class SubmissionList(LoginRequiredMixin, ListView):
+class SubmissionList(ListView):
     model = Submission
 
 
