@@ -1,8 +1,22 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Home</h1>
-    {% for site in sites %}
+    
+    
         <!-- TODO: GRID FOR IMAGES-->
+        <section class="flex grid">
+            {% for site in sites %}
+            <article class="post">
+                {% for photo in site.photo_set.all %}
+                <a href="https://{{site.url}}" target="_blank">
+                    <img src="{{ photo.url }}" alt="{{site.name}}">
+                </a>
+                {% endfor %}
+                
+                <h6>
+                    <a href="{% url 'sites_detail' site.id %}">{{site.name}}</a>
+                </h6>
+            </article>
+            {% endfor %}
+        </section>
 
-    {% endfor %}
 {% endblock %}
