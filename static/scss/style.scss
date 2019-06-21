@@ -338,9 +338,12 @@ h6 {
 /*------------------------------------*\
     # Site Create
 \*------------------------------------*/
-.input {
+.submit h6 {
+    margin-bottom: 2rem;
+}
+.input, .select-multiple, .select {
     display: block;
-    margin-bottom: 30px;
+    margin: 1rem 0 4rem 0;
     padding: 10px 0;
     font-size: $base-font-size;
     color: $secondary;
@@ -348,11 +351,26 @@ h6 {
     width: 100%;
     background: none;
     border: 0;
-    border-bottom: 1px solid darken($secondary, 70%);
     outline: none;
+    border-bottom: 1px solid darken($secondary, 70%);
+}
+select[multiple]:focus option:checked {
+  background: white linear-gradient(0deg, grey 0%, grey 100%);
+  
+}
+select[multiple] option:checked {
+    color: $primary;
 }
 
-
+.button {
+    border: 0;
+    font-size: $base-font-size * 1.2;
+    font-family: inherit;
+    display: inline-block;
+    padding: 10px 0;
+    cursor: pointer;
+    outline: none;
+}
 /*------------------------------------*\
     # Footer
 \*------------------------------------*/

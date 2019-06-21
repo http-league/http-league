@@ -29,7 +29,7 @@ def admin_check(user):
 # // TODO: Site Class based views
 
 
-class SiteCreate(CreateView):
+class SiteCreate(isAdminMixin, CreateView):
     model = Site
     form_class = SiteCreateForm
 
@@ -55,8 +55,7 @@ class SubmissionList(ListView):
 
 class SubmissionCreate(CreateView):
     model = Submission
-    fields = ['site_name', 'url', 'statement',
-              'category', 'style', 'tech_stack']
+    form_class = SubmissionCreateForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -124,19 +123,19 @@ def submissions_detail(request, submission_id):
     submission = Submission.objects.get(id=submission_id)
     return render(request, 'main_app/submission_detail.html', {'title': 'Submission · HTTP League', 'submission': submission, 'year': year})
 
-# def signup(request):
-#     error_message = ''
-#     if request.method == 'POST':
-#         form = UserCreationForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             login(request, user)
-#             return redirect('index')
-#         else:
-#             error_message = 'Invalid sign up - try again'
-#     form = UserCreationForm()
-#     context = {'form': form, 'error_message': error_message}
-#     return render(request, 'registration/signup.html', context)
+def signup(request):
+    error_message = ''
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('home')
+        else:
+            error_message = 'Invalid sign up - try again'
+    form = UserCreationForm()
+    context = {'form': form, 'error_message': error_message}
+    return render(request, 'registration/signup.html', context)
 
 
 def add_site_photo(request, site_id):
