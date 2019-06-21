@@ -27,11 +27,19 @@ As a new user you are able to browse the website to see others submissions. But 
 
 ## Screenshots
 
+## Next Steps
+
+- Create a Category filter
+- Be able to have admin rate a submitted website
+- Have authorized users comment on user submitted websites
+- Have screenshots automatically generated when a site is submitted
+- Account information/Edit account
+
 ## Credits
 
 ### Designers
-- Alex Morales
-- Scott Reid
+- [Alex Morales](alexmorales.co)
+- [Scott Reid](scottreidux.com)
 
 ### Developers
 - [Gideon Ibemere Jr](https://github.com/gideonibemerejr)
