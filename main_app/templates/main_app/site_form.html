@@ -1,12 +1,22 @@
 {% extends "../layout.html" %}
 {% block content %}
-    <h1>Create Site</h1>
-    <form action="" enctype="multipart/form-data" method="POST">
-        {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-
-        </table>
-        <input type="submit" value="Submit!">
-    </form>
+   <section class="post-single">
+       <div class="submit">
+           <h6 class="submit-title">Add a Site</h6>
+            <form class="form-group" action="" enctype="multipart/form-data" method="POST">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="field">
+                    <h6 for="{{ field.id_for_label}}">{{field.html_name }}</h6>
+                    {{ field }}
+                </div>
+                    
+                {% endfor %}
+                <input class="button"
+            type="submit" value="Submit">
+            <input type="hidden" name="submitted" id="submitted" value="true">
+            </form>
+       </div>
+   </section>
+    
 {% endblock %}

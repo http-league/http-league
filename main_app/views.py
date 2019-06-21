@@ -31,8 +31,7 @@ def admin_check(user):
 
 class SiteCreate(CreateView):
     model = Site
-    fields = ['name', 'url',
-              'category', 'style', 'tech_stack']
+    form_class = SiteCreateForm
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -61,6 +60,7 @@ class SubmissionCreate(CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
+        print(f'{form}')
         return super().form_valid(form)
 
 
@@ -92,9 +92,10 @@ class SubmissionDelete(DeleteView):
 #     model = Post
 #     success_url = '/blog/'
 
-# TODO: FINISH home.html template
+# // TODO: FINISH home.html template
 def home(request):
     sites = Site.objects.all()
+    print(f'{sites}')
     return render(request, 'home.html', {'title': 'HTTP League · Web Design Repo', 'sites': sites, 'year': year})
 
 
@@ -108,7 +109,7 @@ def blog_index(request):
     return render(request, 'blog/post_list.html', {'title': 'Blog · HTTP League', 'year': year})
 
 
-# TODO: FINISH sites/detail.html
+# // TODO: FINISH sites/detail.html
 def sites_detail(request, site_id):
     site = Site.objects.get(id=site_id)
     return render(request, 'sites/detail.html', {'title': 'HTTP League · Web Design Repo', 'site': site, 'year': year})
