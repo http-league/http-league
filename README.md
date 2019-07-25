@@ -46,8 +46,8 @@ Login to get started! However, if you don't want to, you don't have to. The site
 ## Credits
 
 ### Designers
-- [Alex Morales](alexmorales.co)
-- [Scott Reid](scottreidux.com)
+- [Alex Morales](https://alexmorales.co)
+- [Scott Reid](https://scottreidux.com)
 
 ### Developers
 - [Gideon Ibemere Jr](https://github.com/gideonibemerejr)
