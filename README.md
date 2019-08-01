@@ -50,7 +50,7 @@ Login to get started! However, if you don't want to, you don't have to. The site
 - [Scott Reid](https://scottreidux.com)
 
 ### Developers
-- [Gideon Ibemere Jr](https://github.com/gideonibemerejr)
+- [Gideon Ibemere Jr](https://www.gideonjr.com)
 - [Aaron Stowe](https://github.com/AzStowe)
 
 
