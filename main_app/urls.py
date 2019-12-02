@@ -30,11 +30,6 @@ urlpatterns = [
     # path('comment/<int:pk>/update/', views.CommentUpdate.as_view(), name='comments_update'),
     # path('comment/<int:pk>/delete/', views.CommentDelete.as_view(), name='comments_delete'),
 
-    # Login/Profile paths
-    # path('profile/', views.view_profile, name='view_profile'),
-    # path('profile/edit', views.edit_profile, name='edit_profile'),
-    # path('login', views.login, name'login'),
-    # path('accounts/signup', views.signup, name='signup'),
 
     # # Submissions/Community
     path('submissions/', views.SubmissionList.as_view(), name='submission_index'),

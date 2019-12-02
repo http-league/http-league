@@ -15,7 +15,6 @@ from django.apps import AppConfig
 # Create your models here.
 
 
-
 @receiver(post_save, sender=User)
 def ensure_profile_exists(sender, **kwargs):
     if kwargs.get('created', False):
@@ -27,7 +26,7 @@ class Profile(models.Model):
     bio = models.CharField(max_length=100, default='')
     email = models.EmailField(max_length=75)
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
-    
+
     def __str__(self):
         return f'{self.user.username} Profile'
 
@@ -90,7 +89,6 @@ class Submission(models.Model):
     tech_stack = models.ForeignKey(Tech_stack, on_delete=models.CASCADE)
     photo = models.ForeignKey(Photo, on_delete=models.CASCADE)
 
-
     def __str__(self):
         return self.statement
 
@@ -101,7 +99,7 @@ class Submission(models.Model):
 class Comment(models.Model):
     site = models.ForeignKey(
         Site, on_delete=models.CASCADE, related_name='comments')
-    # ! TODO: CHANGE username field to 1:M relationship where a User has many comments.
+    # // ! TODO: CHANGE username field to 1:M relationship where a User has many comments.
     username = models.CharField(max_length=100)
     body = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
